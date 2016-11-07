@@ -1,0 +1,59 @@
+// main 部分
+.main{
+    margin-left: 239px;
+    border-left: 1px solid #E9E9E9;
+    
+    .f-normal{
+        margin-top: 20px;
+    }
+    .f-search, .f-normal{
+        .ant-form-item{
+            margin-right: 25px;
+            margin-bottom: 15px;
+            >label:after {
+                content: ":";
+                margin: 0 8px 0 2px;
+                position: relative;
+                top: -.5px;
+            }
+        }
+    }
+
+    .f-create{
+        text-align: right;
+
+        >button{
+            margin: 20px 0;
+        }
+
+        &:after{
+            content: ' ';
+            display: table;
+            clear: both;
+        }
+    }
+
+    .ant-table-tbody{
+        tr{
+            td{
+                img{
+                    max-height: 100px;
+                    margin: 0 auto;
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+.title{
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+}
+    
+.item{
+    padding: 40px 30px;
+    border-bottom: 1px solid #e6e6e6;
+    position: relative;
+}
+

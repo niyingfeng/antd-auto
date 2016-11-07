@@ -1,12 +1,8 @@
 // 纯数据展现情况列表
 import React from 'react';
 
-import FeatureSetConfig from '../component/FeatureSetConfig';
-
-import Immutable from 'immutable';
+import FeatureSetConfig from '../common/FeatureSetConfig';
 import Reqwest from 'reqwest';
-
-import testData from '../common/test-data';
 import {message} from 'antd';
 
 const graph_conf = {
@@ -231,15 +227,20 @@ const table_conf = {
     // callback 组件数据的回调函数(接受列表数据参数)
     initData: function(callback){
        
-       // 模拟数据
-       setTimeout(function(){
-            let list = testData.tableList;
-            list.forEach(function(ele) {
-                ele.key = ele.docid;
-                ele.img = ele.images && ele.images[0] && ele.images[0].img
-            });
-            callback(list);
-       }, 1000)
+        // 模拟数据
+        Reqwest({
+            url: '/api/example',
+            data: {},
+
+            type: 'json',
+            success: function (data) {
+                let list = data.data;
+                list.forEach(function(ele) {
+                    ele.key = Math.random();
+                });
+                callback(list);
+            }
+        });
     },
         
     columns: [
@@ -279,15 +280,13 @@ const Feature1 = FeatureSetConfig(graph_conf2);
 const Feature2 = FeatureSetConfig(graph_conf3);
 const Feature3 = FeatureSetConfig(table_conf);
 
-const Feature = React.createClass({
+const Feature = (props) => {
 
-        render: function() {
-            return  <div>
-                        <Feature1 />
-                        <Feature2 />
-                        <Feature3 />
-                    </div>
-        }
-    });
+        return  <div>
+                    <Feature1 className={props.className}/>
+                    <Feature2 className={props.className}/>
+                    <Feature3 className={props.className}/>
+                </div>
+}
 
 export default Feature;

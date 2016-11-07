@@ -1,8 +1,25 @@
-
-.normal {
-  margin: 100px;
+// 无权限样式
+.nopermission{
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    padding: 50px;
+    text-align: center;
 }
 
-.list {
-  margin-top: 20px;
+
+:global(.formLayout){
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.75);
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    z-index: 999;
+}
+
+:global(.uploadImg){
+    max-width: 300px;
+    max-height: 400px;
 }

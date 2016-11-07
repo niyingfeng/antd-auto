@@ -1,12 +1,10 @@
 // 纯数据展现情况列表
 import React from 'react';
 
-import FeatureSetConfig from '../component/FeatureSetConfig';
-
-import Immutable from 'immutable';
+import FeatureSetConfig from '../common/FeatureSetConfig';
 import Reqwest from 'reqwest';
 
-import testData from '../common/test-data';
+//import testData from '../common/test-data';
 
 // 增加(Create)、重新取得数据(Retrieve)、更新(Update)和删除(Delete)
 const table_conf = {
@@ -18,43 +16,19 @@ const table_conf = {
     // callback 组件数据的回调函数(接受列表数据参数)
     initData: function(callback){
         // 接口调用数据形式
-        /*
-            let data = {
-                type: 'entry_list',
-                num: 20,
-                ua: 'bd_1_1_1_5-5-0-0_1',
-                cuid: '00000000000000000000000000000000%7C0000000000000000',
-                channel: 'AA_0',
-                dir: 'up'
+        Reqwest({
+            url: '/api/example',
+            data: {},
+
+            type: 'json',
+            success: function (data) {
+                let list = data.data;
+                list.forEach(function(ele) {
+                    ele.key = Math.random();
+                });
+                callback(list);
             }
-
-            Reqwest({
-                url: 'http://uil.cbs.baidu.com/rssfeed/fetch?fn=?',
-                data: data,
-                type: 'jsonp',
-                jsonpCallback: 'fn',
-                success: function (data) {
-                    let lists = data.data.stream_data;
-                    
-                    // 必须要向数据中 添加唯一的 key
-                    lists.forEach(function(ele) {
-                        ele.key = ele.docid;
-                    });
-
-                    callback(lists);
-                }
-            });
-        */
-       
-       // 模拟数据
-       setTimeout(function(){
-            let list = testData.tableList;
-            list.forEach(function(ele) {
-                ele.key = ele.docid;
-                ele.img = ele.images && ele.images[0] && ele.images[0].img
-            });
-            callback(list);
-       }, 1000)
+        });
     },
         
     // table 列表展现配置
@@ -94,13 +68,13 @@ const table_conf = {
             width: 150
         },{
             title: '图片',
-            dataIndex: 'img',
+            dataIndex: 'image',
             type: 'image'
         }
     ]
 
 };
 
-const Feature1 = FeatureSetConfig(table_conf);
+const Feature = FeatureSetConfig(table_conf);
 
-export default Feature1;
+export default Feature;

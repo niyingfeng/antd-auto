@@ -17,7 +17,7 @@ let UForm = React.createClass({
         const updateItem = this.props.updateItem;
         
         // 详情见antd form 文档
-        const { getFieldProps } = this.props.form;
+        const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
             labelCol: { span: 6 },
             wrapperCol: { span: 18 },
@@ -31,7 +31,7 @@ let UForm = React.createClass({
                                 UType.map(function(item){
                                     item.defaultValue = updateItem[item.name]||'';
                                     //return self.dealConfigUType(item, defaultValue);
-                                    return <CFormItem key={item.name} getFieldProps={getFieldProps} formItemLayout={formItemLayout} item={item}/>
+                                    return <CFormItem key={item.name} getFieldDecorator={getFieldDecorator} formItemLayout={formItemLayout} item={item}/>
                                 })
                             }
                         </Form>

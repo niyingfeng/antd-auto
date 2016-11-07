@@ -2,14 +2,16 @@ import React from 'react';
 import { Menu, Icon } from 'antd';
 import { Link } from 'dva/router';
 
-const MenuItem  = (items) => {
+import styles from './Sider.less';
+
+const MenuItemCreat  = (items) => {
         return items.map(function(item){
             if(item.items){
                 let title = <span>{item.icon ? (<Icon type={item.icon} />): ''}<span>{item.title}</span></span>;
 
                 return  <Menu.SubMenu key={item.key} title={title}>
                             { 
-                                MenuItem(item.items)
+                                MenuItemCreat(item.items)
                             }
                         </Menu.SubMenu>
             }else{
@@ -21,15 +23,16 @@ const MenuItem  = (items) => {
 };
 
 function Sider(props){
-    return  <Menu style={props.menuStyle}
-                defaultOpenKeys={props.openKeys}
-                selectedKeys={[props.selectedKey]}
-                mode="inline">
-                { 
-                    MenuItem(props.menuList)
-                }
+    return  <div className={styles.sider} style={props.style}>
+               <Menu defaultOpenKeys={props.openKeys}
+                    selectedKeys={[props.selectedKey]}
+                    mode="inline">
+                    { 
+                        MenuItemCreat(props.menu)
+                    }
 
-            </Menu>;
+                </Menu>
+            </div>;
 };
 
 export default Sider;

@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { Form, Select, Input, Button, Icon , DatePicker, TimePicker, Radio, Switch, Cascader} from 'antd';
 import { Upload, Modal, message } from 'antd';
 
@@ -16,7 +17,7 @@ let CFormItem = React.createClass({
     },
 
     render: function() {
-        const getFieldProps = this.props.getFieldProps;
+        const getFieldDecorator = this.props.getFieldDecorator;
         const formItemLayout = this.props.formItemLayout || {};
         const item = this.props.item || {};
         
@@ -28,20 +29,24 @@ let CFormItem = React.createClass({
                             label={item.label}
                             key={item.name}
                             {...formItemLayout}>
-                            <Input placeholder={item.placeholder||'' } style={{ width: item.width }}
-                            {...getFieldProps(item.name, {rules:item.rules, initialValue:defaultValue})} />    
+
+                            {getFieldDecorator(item.name, {rules:item.rules, initialValue:defaultValue})(
+                                <Input placeholder={item.placeholder||'' } style={{ width: item.width }} />
+                            )}
                         </FormItem>
                 break;
 
             case 'date':
-                defaultValue = defaultValue ?
-                    (/(\d){4}(\-(\d){2}){2}\s((\d){2}(\:)){2}(\d){2}/.test(defaultValue)?defaultValue:new Date(defaultValue)):
-                    new Date();
+                defaultValue = moment(defaultValue || new Date(), "YYYY-MM-DD hh:mm:ss");
+
                 return <FormItem
                             label={item.label}
                             key={item.name}
                             {...formItemLayout}>
-                            <DatePicker showTime format="yyyy-MM-dd HH:mm:ss" {...getFieldProps(item.name, { initialValue: defaultValue})} />  
+
+                            {getFieldDecorator(item.name, { initialValue: defaultValue})(
+                                <DatePicker showTime format="YYYY-MM-DD hh:mm:ss" />
+                            )}
                         </FormItem>
                 break;
 
@@ -50,13 +55,16 @@ let CFormItem = React.createClass({
                             label={item.label}
                             key={item.name}
                             {...formItemLayout}>
-                            <Select  {...getFieldProps(item.name, { initialValue: defaultValue })} style={{ width: item.width }} onChange={item.onChange || function(){}}>
-                                {
-                                    item.options.map(function(item){
-                                        return <Option key={item.value} value={item.value}>{item.text || item.value}</Option>
-                                    })
-                                }
-                            </Select>
+
+                            {getFieldDecorator(item.name, { initialValue: defaultValue })(
+                                <Select style={{ width: item.width }} onChange={item.onChange || function(){}}>
+                                    {
+                                        item.options.map(function(item){
+                                            return <Option key={item.value} value={item.value}>{item.text || item.value}</Option>
+                                        })
+                                    }
+                                </Select>
+                            )}
                         </FormItem>
                 break;
 
@@ -65,7 +73,11 @@ let CFormItem = React.createClass({
                             label={item.label}
                             key={item.name}
                             {...formItemLayout}>
-                            <Cascader  {...getFieldProps(item.name, { initialValue: defaultValue })} options={item.options} style={{ width: item.width }} changeOnSelect/>
+
+                            {getFieldDecorator(item.name, { initialValue: defaultValue })(
+                                <Cascader options={item.options} style={{ width: item.width }} changeOnSelect/>
+                            )}
+                            
                         </FormItem>
                 break;
 
@@ -74,13 +86,16 @@ let CFormItem = React.createClass({
                             label={item.label}
                             key={item.name}
                             {...formItemLayout}>
-                            <RadioGroup {...getFieldProps(item.name, { initialValue: defaultValue })}>
-                                {
-                                    item.options.map(function(item){
-                                        return <Radio key={item.value} value={item.value}>{item.text || item.value}</Radio>
-                                    })
-                                }
-                            </RadioGroup>
+
+                            {getFieldDecorator(item.name, { initialValue: defaultValue })(
+                                <RadioGroup>
+                                    {
+                                        item.options.map(function(item){
+                                            return <Radio key={item.value} value={item.value}>{item.text || item.value}</Radio>
+                                        })
+                                    }
+                                </RadioGroup>
+                            )}
                         </FormItem>
                 break;
 
@@ -89,7 +104,10 @@ let CFormItem = React.createClass({
                             label={item.label}
                             key={item.name}
                             {...formItemLayout}>
-                            <Switch {...getFieldProps(item.name, { initialValue: defaultValue})} />
+
+                            {getFieldDecorator(item.name, { initialValue: defaultValue})(
+                                <Switch />
+                            )}
                         </FormItem>
                 break;
 
@@ -100,9 +118,11 @@ let CFormItem = React.createClass({
                             key={item.name}
                             {...formItemLayout}>
                             <img className="uploadImg" src={defaultValue} />
-                            <Input
-                                {...getFieldProps(item.name, { initialValue:defaultValue})}
-                                onChange={this.changeImgUrl} /> 
+
+                            {getFieldDecorator(item.name, { initialValue:defaultValue})(
+                                <Input onChange={this.changeImgUrl} />
+                            )}
+
                             <BDUploader success={this.uploadSuccess} />
                         </FormItem>
 

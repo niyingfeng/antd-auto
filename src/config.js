@@ -24,9 +24,8 @@ const Config = {
         title: "测试配置管理后台",
         icon: "appstore",
         style: {
-            padding: "15px 15px 15px 25px",
-            borderBottom: "1px solid #E9E9E9",
-            backgroundColor: "#F5F5F5"
+            backgroundColor: "#F5F5F5",
+            color: "#666"
         }
     },
 
@@ -94,32 +93,32 @@ const Config = {
             }
         ],
         openKeys:['dataShow','dataOperate','customOperate'],
-        selectedKey: "Feature1",
+        selectedKey: "Feature1-1",
         style: {}
     },
 
-    // main: {
-    //     components: {
-    //         "Feature1-1": {
-    //             title: 'table 数据展示',
-    //             component: require('../feature/Feature1-1')
-    //         }, 
-    //         "Feature1-1-1": {
-    //             title: 'table 数据展示',
-    //             component: require('../feature/Feature1-1-1')
-    //         }, 
-    //         "Feature1-2": {
-    //             title: 'simple对象 数据展示',
-    //             component: require('../feature/Feature1-2')
-    //         }, 
-    //         "Feature1-3": {
-    //             title: '数据可视化 数据展示',
-    //             component: require('../feature/Feature1-3')
-    //         }, 
-    //         "Feature1-4": {
-    //             title: '综合数据展示',
-    //             component: require('../feature/Feature1-4')
-    //         },
+    main: {
+        components: {
+            "Feature1-1": {
+                title: 'table 数据展示',
+                component: require('./components/feature/Feature1-1')
+            }, 
+            "Feature1-1-1": {
+                title: 'table 数据展示',
+                component: require('./components/feature/Feature1-1-1')
+            }, 
+            "Feature1-2": {
+                title: 'simple对象 数据展示',
+                component: require('./components/feature/Feature1-2')
+            }, 
+            "Feature1-3": {
+                title: '数据可视化 数据展示',
+                component: require('./components/feature/Feature1-3')
+            }, 
+            "Feature1-4": {
+                title: '综合数据展示',
+                component: require('./components/feature/Feature1-4')
+            },
 
     //         "Feature2-1": {
     //             title: 'table 数据搜索操作',
@@ -171,9 +170,9 @@ const Config = {
     //             title: '这是功能区域标题8',
     //             component: require('../feature/Feature2')
     //         }
-    //     },
-    //     style: {} 
-    // },
+        },
+        style: {} 
+    },
 
     userInfo:{
         name: BaiduInfo.name || '游客',

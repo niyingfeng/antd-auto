@@ -9,56 +9,51 @@ import styles from './IndexPage.less';
 
 import Header from '../components/header/Header';
 import Sider from '../components/sider/Sider';
-// import Main from './js/view/Main';
+import Main from '../components/main/Main';
 
 //const components = config.main.components;
 const headerInfo = {
-    title: config.header.title,
-    icon: config.header.icon,
-    style: config.header.style,
-
+    ...config.header,
     name: config.userInfo.name,
     aver: config.userInfo.aver
 }
 
-const siderInfo = {
-    menuList: config.sider.menu,
-    menuStyle: config.sider.style,
-    openKeys: config.sider.openKeys
+const siderInfo = { ...config.sider };
+
+const mainInfo = {
+    style: config.sider.style
 }
 
-const App = React.createClass({
-    getDefaultProps: function(){
-    },
-    getInitialState: function(){
-        return {
-            featureId: this.props.params.FeatureId || config.sider.selectedKey,
-            params:  this.props.params.params,
+const IndexInfo = {
+    permission: config.userInfo.permission,
+    loginUrl: config.userInfo.permission
+}
+
+const App = (props) => {
+
+        let featureId = props.params.FeatureId || config.sider.selectedKey;
+
+        let featureInfo = {
+            featureId: featureId,
+            params: props.params.params,
+
+            feature: config.main.components[featureId].component,
+            title: config.main.components[featureId].title,
         }
-    },
-    componentWillMount: function(){},
+        
+        if(IndexInfo.permission){
+            return  <div>
+                        <Header {...headerInfo}/>
+                        <Sider {...siderInfo} selectedKey={featureId}/>
+                        <Main {...mainInfo} {...featureInfo}/>
+                    </div>
+        }else{
+            return  <div className={styles.nopermission}>
+                        您暂无权限处理该系统工作，请先
+                        <a href={IndexInfo.loginUrl}>登录</a>
+                        或者找相关人员申请权限。
+                    </div>
+        }
+}
 
-    render: function(){
-        return  <div>
-                    <Header {...headerInfo}/>
-                    <Sider {...siderInfo}/>
-                </div>
-    },
-
-    componentDidMount: function(){
-    },
-    componentWillReceiveProps: function(newProps){
-        // this.setState({
-        //     featureId: newProps.params.FeatureId,
-        //     params:  newProps.params.params,
-        // });
-    },
-    shouldComponentUpdate: function(){
-        //return true;
-    },
-    componentWillUpdate: function(){},
-    componentDidUpdate: function(){},
-    componentWillUnmount: function(){}
-});
-
-export default connect()(App);
+export default App;

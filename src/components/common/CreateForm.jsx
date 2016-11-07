@@ -12,7 +12,7 @@ let CForm = React.createClass({
         const self = this;
         const CType = this.props.CType;
 
-        const { getFieldProps } = this.props.form;
+        const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
             labelCol: { span: 6 },
             wrapperCol: { span: 18 },
@@ -26,7 +26,7 @@ let CForm = React.createClass({
                             { 
                                 CType.map(function(item){
                                     //return self.dealConfigCType(item);
-                                    return <CFormItem key={item.name} getFieldProps={getFieldProps} formItemLayout={formItemLayout} item={item}/>
+                                    return <CFormItem key={item.name} getFieldDecorator={getFieldDecorator} formItemLayout={formItemLayout} item={item}/>
                                 })
                             }
                         </Form>
@@ -66,6 +66,7 @@ let CForm = React.createClass({
         this.handleReset();
     }
 });
+
 CForm = Form.create()(CForm);
 
 export default CForm;

@@ -1,12 +1,8 @@
 // 纯数据展现情况列表
 import React from 'react';
 
-import FeatureSetConfig from '../component/FeatureSetConfig';
-
-import Immutable from 'immutable';
+import FeatureSetConfig from '../common/FeatureSetConfig';
 import Reqwest from 'reqwest';
-
-import testData from '../common/test-data';
 
 const graph_conf = {
     
@@ -59,15 +55,21 @@ const graph_conf = {
         }
        
        // 模拟数据
-       setTimeout(function(){
-            option.series = testData.graphList;
-            option.series.forEach(function(item) {
-                item.type = 'line';
-                item.stack = '总量'
-            });
+       Reqwest({
+            url: '/api/example4',
+            data: {},
 
-            callback(option);
-       }, 1000)
+            type: 'json',
+            success: function (data) {
+                option.series = data.data;
+                option.series.forEach(function(item) {
+                    item.type = 'line';
+                    item.stack = '总量';
+                });
+
+                callback(option);
+            }
+        });
     }
 
 };
@@ -130,7 +132,7 @@ const graph_conf2 = {
             ]
 
             callback(option);
-       }, 1000)
+       }, 3000)
     }
 
 };
@@ -216,11 +218,21 @@ const graph_conf3 = {
             }]
 
             callback(option);
-       }, 1000)
+       }, 6000)
     }
 
 };
 
-const Feature = FeatureSetConfig(graph_conf3);
+const Feature1 = FeatureSetConfig(graph_conf);
+const Feature2 = FeatureSetConfig(graph_conf2);
+const Feature3 = FeatureSetConfig(graph_conf3);
+
+const Feature = (props) => {
+    return  <div>
+                <Feature1  className={props.className}/>
+                <Feature2  className={props.className}/>
+                <Feature3  className={props.className}/>
+            </div>;
+}
 
 export default Feature;

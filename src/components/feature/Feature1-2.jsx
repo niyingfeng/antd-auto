@@ -1,12 +1,8 @@
 // 纯数据展现情况列表
 import React from 'react';
 
-import FeatureSetConfig from '../component/FeatureSetConfig';
-
-import Immutable from 'immutable';
+import FeatureSetConfig from '../common/FeatureSetConfig';
 import Reqwest from 'reqwest';
-
-import testData from '../common/test-data';
 
 const simple_conf = {
     
@@ -14,12 +10,18 @@ const simple_conf = {
 
     initData: function(callback){
        // 模拟数据
-       setTimeout(function(){
-            let object = testData.simpleObject;
-            object.key = object.docid;
+       Reqwest({
+            url: '/api/example3',
+            data: {},
 
-            callback(object);
-       }, 1000)
+            type: 'json',
+            success: function (data) {
+                let object = data.data;
+                object.key = object.docid;
+
+                callback(object);
+            }
+        });
     },
 
     UType:[
@@ -38,11 +40,26 @@ const simple_conf = {
             label: '链接',
             type: 'string'
         },{
+            name: 'stype',
+            label: '项目类型Select',
+            type: 'select',
+            options:[{
+                text: '选项一',
+                value: 'one'
+            },{
+                text: '选项二',
+                value: 'two'
+            },{
+                text: '选项三',
+                value: 'three'
+            }],
+            width: 150
+        },{
             name: 'date',
             label: '日期',
             type: 'date'
         },{
-            name: 'img',
+            name: 'image',
             label: '图片',
             type: 'imageUpload'
         }
@@ -66,6 +83,6 @@ const simple_conf = {
     ]
 }
 
-const Feature1 = FeatureSetConfig(simple_conf);
+const Feature = FeatureSetConfig(simple_conf);
 
-export default Feature1;
+export default Feature;

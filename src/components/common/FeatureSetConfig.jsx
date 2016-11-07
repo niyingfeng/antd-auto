@@ -6,7 +6,7 @@ import { Table, Form, Select, Input, Row, Col, Button, Icon } from 'antd';
 import { DatePicker, TimePicker, Radio, Switch} from 'antd';
 import { Upload, Modal, message, Spin} from 'antd';
 
-import { Link } from 'react-router';
+import { Link } from 'dva/router';
 
 import Immutable from 'immutable';
 import Reqwest from 'reqwest';
@@ -48,7 +48,7 @@ const FeatureSet = (config) => {
         render: function() {
             const self = this;
             
-            return  <div className="featureItem">
+            return  <div className={this.props.className}>
                         <RForm RType={config.RType} submit={self.handleRetrieve}/>
                         <CForm CType={config.CType} submit={self.handleCreate}/>
                         <UForm UType={config.UType} submit={self.handleUpdate} isShow={this.state.updateFromShow} updateItem={this.state.updateFromItem} hideForm={this.hideUpdateForm}/>
@@ -276,7 +276,7 @@ const FeatureSet = (config) => {
             const self = this;
             const itemInfo = this.state.item;
 
-            const { getFieldProps } = this.props.form;
+            const { getFieldDecorator } = this.props.form;
             const formItemLayout = {
                 labelCol: { span: 3 },
                 wrapperCol: { span: 18 },
@@ -284,7 +284,7 @@ const FeatureSet = (config) => {
 
             const operate = config.operate || [];
 
-            return  <div className="featureItem"> 
+            return  <div className={this.props.className}> 
                         <Form horizontal className='p-relative'>
                             {
                                 this.state.loading?
@@ -296,7 +296,7 @@ const FeatureSet = (config) => {
                             { 
                                 config.UType.map(function(item){
                                     item.defaultValue = itemInfo[item.name]||'';
-                                    return <CFormItem key={item.name} getFieldProps={getFieldProps} formItemLayout={formItemLayout} item={item}/>
+                                    return <CFormItem key={item.name} getFieldDecorator={getFieldDecorator} formItemLayout={formItemLayout} item={item}/>
                                 })
                             }
                         </Form>
@@ -366,7 +366,7 @@ const FeatureSet = (config) => {
 
             const operate = config.operate || [];
 
-            return  <div className="featureItem">
+            return  <div className={this.props.className}>
                         {this.state.option?
                         <ReactEcharts
                             option={this.state.option} 

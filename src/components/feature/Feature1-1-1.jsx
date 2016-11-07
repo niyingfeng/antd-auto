@@ -2,12 +2,8 @@
 import React from 'react';
 import Reqwest from 'reqwest';
 
-import Config from '../common/config';
-import Util from '../common/util';
-import CopyClipboard from '../component/CopyClipboard';
-
-import FeatureSetConfig from '../component/FeatureSetConfig';
-import testData from '../common/test-data';
+import CopyClipboard from '../common/CopyClipboard';
+import FeatureSetConfig from '../common/FeatureSetConfig';
 
 // 增加(Create)、重新取得数据(Retrieve)、更新(Update)和删除(Delete)
 const table_conf = {
@@ -18,39 +14,19 @@ const table_conf = {
     // 需要手动添加唯一id key
     // callback 组件数据的回调函数(接受列表数据参数)
     initData: function(callback){
-        // 接口调用数据形式
-    
-        // let data = {
-        //     ship: 0,
-        //     num: 100
-        // }
+        Reqwest({
+            url: '/api/example2',
+            data: {},
 
-        // Reqwest({
-        //     url: Config.host + '/umis/tools/newslist',
-        //     data: data,
-        //     type: 'jsonp',
-        //     jsonpCallback: 'fn',
-        //     success: function (data) {
-        //         let lists = data.data.list;
-                
-        //         // 必须要向数据中 添加唯一的 key
-        //         lists.forEach(function(ele) {
-        //             ele.key = ele.id;
-        //         });
-
-        //         callback(lists);
-        //     }
-        // });
-    
-       
-       //模拟数据
-       setTimeout(function(){
-            let list = testData.table2List;
-            list.forEach(function(ele) {
-                ele.key = ele.id;
-            });
-            callback(list);
-       }, 1000)
+            type: 'json',
+            success: function (data) {
+                let list = data.data;
+                list.forEach(function(ele) {
+                    ele.key = ele.id;
+                });
+                callback(list);
+            }
+        });
     },
         
     // table 列表展现配置
@@ -124,6 +100,6 @@ const table_conf = {
 
 };
 
-const Feature1 = FeatureSetConfig(table_conf);
+const Feature = FeatureSetConfig(table_conf);
 
-export default Feature1;
+export default Feature;

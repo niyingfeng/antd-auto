@@ -23,7 +23,7 @@ let Former = React.createClass({
         const updateItem = this.props.updateItem || {};
         
         // 详情见antd form 文档
-        const { getFieldProps } = this.props.form;
+        const { getFieldDecorator } = this.props.form;
 
         return  <div className="f-normal">
                     <Form inline>
@@ -31,7 +31,7 @@ let Former = React.createClass({
                             fields.map(function(item){
                                 item.defaultValue = updateItem[item.name]||item.defaultValue||'';
                                 //return self.dealConfigUType(item, defaultValue);
-                                return <CFormItem key={item.name} getFieldProps={getFieldProps} item={item}/>
+                                return <CFormItem key={item.name} getFieldDecorator={getFieldDecorator} item={item}/>
                             })
                         }
                     </Form>

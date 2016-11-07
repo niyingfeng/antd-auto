@@ -8,13 +8,13 @@ let RForm = React.createClass({
     render: function() {
         const self = this;
         const RType = this.props.RType;
-        const { getFieldProps } = this.props.form;
+        const { getFieldDecorator } = this.props.form;
         return RType ?
                 (<div className="f-search">
                     <Form inline>
                         { 
                             RType.map(function(item){
-                                return <CFormItem key={item.name} getFieldProps={getFieldProps} item={item}/>
+                                return <CFormItem key={item.name} getFieldDecorator={getFieldDecorator} item={item}/>
                             })
                         }
                         <FormItem key="search-btn">
