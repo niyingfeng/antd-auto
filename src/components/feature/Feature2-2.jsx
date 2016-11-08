@@ -1,10 +1,9 @@
 // 含有可操作 table 栏的数据展示
 import React from 'react';
 
-import FeatureSetConfig from '../component/FeatureSetConfig';
+import FeatureSetConfig from '../common/FeatureSetConfig';
 
 import Immutable from 'immutable';
-//https://github.com/ded/reqwest
 import Reqwest from 'reqwest';
 
 let CUTpye = [
@@ -70,29 +69,18 @@ const conf = {
     // 初始化页面的数据 回调函数传入 items 列表
     initData: function(callback){
 
-        let data = {
-            type: 'entry_list',
-            num: 20,
-            ua: 'bd_1_1_1_5-5-0-0_1',
-            cuid: '00000000000000000000000000000000%7C0000000000000000',
-            channel: 'AA_0',
-            dir: 'up'
-        }
-
+        // 接口调用数据形式
         Reqwest({
-            url: 'http://uil.cbs.baidu.com/rssfeed/fetch?fn=?',
-            data: data,
-            type: 'jsonp',
-            jsonpCallback: 'fn',
-            success: function (data) {
-                let lists = data.data.stream_data;
-                
-                // 必须要向数据中 添加唯一的 key
-                lists.forEach(function(ele) {
-                    ele.key = ele.docid;
-                });
+            url: '/api/example',
+            data: {},
 
-                callback(lists);
+            type: 'json',
+            success: function (data) {
+                let list = data.data;
+                list.forEach(function(ele) {
+                    ele.key = Math.random();
+                });
+                callback(list);
             }
         });
            
@@ -187,14 +175,10 @@ const conf = {
             //     callback(item, 'delete');
             // }]
         }
-    ],
-
-    uploadfile: function(data){
-        
-    }
+    ]
 
 };
 
-const Feature2 = FeatureSetConfig(conf);
+const Feature = FeatureSetConfig(conf);
 
-export default Feature2;
+export default Feature;

@@ -120,14 +120,14 @@ const Config = {
                 component: require('./components/feature/Feature1-4')
             },
 
-    //         "Feature2-1": {
-    //             title: 'table 数据搜索操作',
-    //             component: require('../feature/Feature2-1')
-    //         }, 
-    //         "Feature2-2": {
-    //             title: 'table 数据增删改操作',
-    //             component: require('../feature/Feature2-2')
-    //         }, 
+            "Feature2-1": {
+                title: 'table 数据搜索操作',
+                component: require('./components/feature/Feature2-1')
+            }, 
+            "Feature2-2": {
+                title: 'table 数据增删改操作',
+                component: require('./components/feature/Feature2-2')
+            }, 
     //         "Feature2-3": {
     //             title: 'simple对象数据修改操作',
     //             component: require('../feature/Feature2-3')

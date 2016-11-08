@@ -1,0 +1,43 @@
+// 通用组件样式集合
+
+.normal{
+    margin-top: 20px;
+}
+.search, .normal{
+    :global(.ant-form-item){
+        margin-right: 25px;
+        margin-bottom: 15px;
+        >label:after {
+            content: ":";
+            margin: 0 8px 0 2px;
+            position: relative;
+            top: -.5px;
+        }
+    }
+}
+
+.create{
+    text-align: right;
+
+    >button{
+        margin: 20px 0;
+    }
+
+    &:after{
+        content: ' ';
+        display: table;
+        clear: both;
+    }
+}
+
+:global(.ant-table-tbody){
+    tr{
+        td{
+            img{
+                max-height: 100px;
+                margin: 0 auto;
+                display: block;
+            }
+        }
+    }
+}
