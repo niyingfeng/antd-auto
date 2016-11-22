@@ -1,12 +1,8 @@
 // 纯数据展现情况列表
 import React from 'react';
 
-import FeatureSetConfig from '../component/FeatureSetConfig';
-
-import Immutable from 'immutable';
+import FeatureSetConfig from '../common/FeatureSetConfig';
 import Reqwest from 'reqwest';
-
-import testData from '../common/test-data';
 
 const simple_conf = {
     
@@ -14,12 +10,18 @@ const simple_conf = {
 
     initData: function(callback){
        // 模拟数据
-       setTimeout(function(){
-            let object = testData.simpleObject;
-            object.key = object.docid;
+       Reqwest({
+            url: '/api/example3',
+            data: {},
 
-            callback(object);
-       }, 1000)
+            type: 'json',
+            success: function (data) {
+                let object = data.data;
+                object.key = object.docid;
+
+                callback(object);
+            }
+        });
     },
 
     Update:function(data, callback){
@@ -63,7 +65,7 @@ const simple_conf = {
             label: '日期',
             type: 'date'
         },{
-            name: 'img',
+            name: 'image',
             label: '图片',
             type: 'imageUpload'
         }

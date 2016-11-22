@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { Form, Select, Input, Button, Icon , DatePicker, TimePicker, Radio, Switch, Cascader} from 'antd';
+import { Form, Select, Input, Button, Icon , DatePicker, TimePicker, Radio, Switch, Cascader, Checkbox } from 'antd';
 import { Upload, Modal, message } from 'antd';
 
 import BDUploader from './BDUploader';
@@ -95,6 +95,18 @@ let CFormItem = React.createClass({
                                         })
                                     }
                                 </RadioGroup>
+                            )}
+                        </FormItem>
+                break;
+
+            case 'checkbox':
+                return <FormItem
+                            label={item.label}
+                            key={item.name}
+                            {...formItemLayout}>
+
+                            {getFieldDecorator(item.name, { initialValue: defaultValue })(
+                                <Checkbox.Group options={item.options} />
                             )}
                         </FormItem>
                 break;

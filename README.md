@@ -12,6 +12,8 @@
 * 优化组织结构，优化代码，倾向于使用组件的 Stateless Functional Component 
 
 
+## Start
+npm start 开始本地调试项目 开启
 
 [ES6 react 实践的技术图](https://github.com/dvajs/dva-knowledgemap)
 [dva 完成一个中型应用](https://github.com/dvajs/dva-docs/blob/master/v1/zh-cn/tutorial/01-%E6%A6%82%E8%A6%81.md)

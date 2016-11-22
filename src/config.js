@@ -58,39 +58,40 @@ const Config = {
                 key: "customOperate",
                 icon: "bars",
                 items: [
-                    {title: "富文本编辑功能", key: "Feature3-1"}
+                    {title: "富文本编辑功能展现", key: "Feature3-1"},
+                    {title: "自组装FromUI组件方式", key: "Feature3-2"}
                 ]
             },
-            {
-                title: "导航1",
-                key: "subTitle1",
-                icon: "setting",
-                items: [
-                    {title: "选项1", key: "Feature1"},
-                    {title: "选项2", key: "Feature2"},
-                    {title: "选项3", key: "Feature3"},
-                    {   
-                        title: "导航3",
-                        key: "subTitle3",
-                        icon: "",
-                        items: [
-                            {title: "选项6", key: "Feature6"},
-                            {title: "选项7", key: "Feature7"},
-                            {title: "选项8", key: "Feature8"}
-                        ]
-                    }
-                ]
-            },{
-                title: "导航2",
-                key: "subTitle2",
-                icon: "delete",
-                items: [
-                    {title: "选项4", key: "Feature4"}
-                ]
-            },{
-                title: "选项5",
-                key: "Feature5"
-            }
+            // {
+            //     title: "导航1",
+            //     key: "subTitle1",
+            //     icon: "setting",
+            //     items: [
+            //         {title: "选项1", key: "Feature1"},
+            //         {title: "选项2", key: "Feature2"},
+            //         {title: "选项3", key: "Feature3"},
+            //         {   
+            //             title: "导航3",
+            //             key: "subTitle3",
+            //             icon: "",
+            //             items: [
+            //                 {title: "选项6", key: "Feature6"},
+            //                 {title: "选项7", key: "Feature7"},
+            //                 {title: "选项8", key: "Feature8"}
+            //             ]
+            //         }
+            //     ]
+            // },{
+            //     title: "导航2",
+            //     key: "subTitle2",
+            //     icon: "delete",
+            //     items: [
+            //         {title: "选项4", key: "Feature4"}
+            //     ]
+            // },{
+            //     title: "选项5",
+            //     key: "Feature5"
+            // }
         ],
         openKeys:['dataShow','dataOperate','customOperate'],
         selectedKey: "Feature1-1",
@@ -128,15 +129,19 @@ const Config = {
                 title: 'table 数据增删改操作',
                 component: require('./components/feature/Feature2-2')
             }, 
-    //         "Feature2-3": {
-    //             title: 'simple对象数据修改操作',
-    //             component: require('../feature/Feature2-3')
-    //         }, 
+            "Feature2-3": {
+                title: 'simple对象数据修改操作',
+                component: require('./components/feature/Feature2-3')
+            }, 
 
-    //         "Feature3-1": {
-    //             title: '富文本编辑区域',
-    //             component: require('../feature/Feature3-1')
-    //         }, 
+            "Feature3-1": {
+                title: '富文本编辑区域',
+                component: require('./components/feature/Feature3-1')
+            }, 
+            "Feature3-2": {
+                title: '自定义组装',
+                component: require('./components/feature/Feature3-2')
+            }, 
 
     //         "Feature1": {
     //             title: '这是功能区域标题1',
