@@ -26,34 +26,34 @@ npm Build 开始构建压缩
 
 ## 整站配置文件详解
 
-**src/config.js** 
+### src/config.js
+
 需配置整体的后台系统数据，以及自定义的配置数据
 
-    
-    // header 管理系统头部配置(必要属性)
-    //     title    String  管理系统显示的标题
-    //     icon     String  管理系统显示的icon 可在 [icon](https://ant.design/components/icon/)
-    //     style    Object  自定义设置头部样式
-        
-    // sider  管理后台侧栏配置(必要属性)
-    //     menu         Array object   sider列表 实现单层or多层级展现
-    //          title   展现的title
-    //          key     sider中对应的选项（若为菜单主项，则在openKeys中使用选择是否打开，
-    //                  若为功能项，则对应 selectedKey，以及 main 中 components 值）
-    //          icon    展现的icon选项（可选）
-    //          items   功能栏目列表（可选 可设置多层结构）
+header 管理系统头部配置(必要属性)
 
-    //     openKeys     Array   默认展开的sider主导航项目（对应menu项目主栏目中的key）
-    //     selectedKey  String  默认打开的目标功能页面key（对应menu项目功能栏目中的key）
-    //     style        Object  自定义样式  
-        
-    // main  功能区域配置
-    //     components   Object  配置sider对应功能区域组件
-    //         FeatureKey     Object  对应sider menu 中的功能key对应功能组件
-    //             title        String  功能区域标题显示名称
-    //             component    require 加载对应功能区域的feature模块
-                
-    //     style        Object  配置样式  
+* title    String  管理系统显示的标题
+* icon     String  管理系统显示的icon 可在 [icon](https://ant.design/components/icon/)
+* style    Object  自定义设置头部样式
+    
+sider  管理后台侧栏配置(必要属性)
+
+* menu         Array object   sider列表 实现单层or多层级展现
+- title   展现的title
+- key     sider中对应的选项（若为菜单主项，则在openKeys中使用选择是否打开，若为功能项，则对应 selectedKey，以及 main 中 components 值）
+- icon    展现的icon选项（可选）
+- items   功能栏目列表（可选 可设置多层结构）
+* openKeys     Array   默认展开的sider主导航项目（对应menu项目主栏目中的key）
+* selectedKey  String  默认打开的目标功能页面key（对应menu项目功能栏目中的key）
+* style        Object  自定义样式  
+    
+main  功能区域配置
+
+* components   Object  配置sider对应功能区域组件
+- FeatureKey     Object  对应sider menu 中的功能key对应功能组件
+title        String  功能区域标题显示名称
+component    require 加载对应功能区域的feature模块
+* style        Object  配置样式  
     
     // header 示例 
     header: {
@@ -65,7 +65,6 @@ npm Build 开始构建压缩
             backgroundColor: "#F5F5F5"
         }
     }
-    
     // sider 边栏导航配置示例 
     sider: {
         // 层级列表
@@ -107,7 +106,6 @@ npm Build 开始构建压缩
             backgroundColor: "#F5F5F5"
         }
     }
-
     // main 示例 
     main: {
         components: {
@@ -128,8 +126,8 @@ npm Build 开始构建压缩
         } 
     }
 
+### src/components/feature/Feature.js
 
-**src/components/feature/Feature.js** 
 配置单独功能页面的配置文件
 
 * table数据，单例数据，图标型数据的展现
@@ -138,17 +136,21 @@ npm Build 开始构建压缩
 * 独立的图片上传组件使用
 * 表单元素自定义使用
 
-    // **必要数据**
-    // type 对于数据展现形式, 目前有 tableList graphList simpleObject 三种类型
-    // initData 初始化展现的数据,参数 callback 用于接受获取的数据
+**必要数据**
 
-    // **table类型 展现数据**
-    // columns
+* type 对于数据展现形式, 目前有 tableList graphList simpleObject 三种类型
+* initData 初始化展现的数据,参数 callback 用于接受获取的数据
 
-    // **table类型 创建数据**
-    // 当数据类型为table 并且含有创建新数据的需求时
-    // CType    Array   展现的填写表单的数据字段。类型含有示例中的形式
-    // Create
+**table类型 展现数据**
+
+* columns
+
+**table类型 创建数据**
+
+当数据类型为table 并且含有创建新数据的需求时
+
+* CType    Array   展现的填写表单的数据字段。类型含有示例中的形式
+* Create
 
     {   
         // 对于数据展现形式 目前有 tableList graphList simpleObject 三种类型
