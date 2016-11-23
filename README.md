@@ -6,22 +6,19 @@
 2. 提供数据操作接口，前端只需关心数据的接受与传递，便可以实现数据的增删改查，而无需再关心CMS内部的实现。暂时实现 table数据的增删改查，simple object数据的修改等
 3. 在以上全自动话的基础上，可以实现自定义组装页面，目前功能包括，图片上传组件（需要正对自己项目调整接口），富文本编辑器（Tinymce），复制功能，antd UI 组件等。
 
+项目对于前期优化
 
-* 基于 dva 脚手架
-* 基于 antd 2.0 UI组件
-* 优化组织结构，优化代码，倾向于使用组件的 Stateless Functional Component 
+1. 基于 dva 脚手架
+2. 基于 antd 2.0 UI组件
+3. 优化组织结构，优化代码，倾向于使用组件的 Stateless Functional Component 
 
 ## Start
-npm start 开始本地调试项目 开启
+npm start 开始本地调试项目 开启 便可以看到整体 DEMO 项目
+
+![image](http://image.freefe.cc/20161123144536.png)
 
 ## Build
 npm Build 开始构建压缩
-
-[ES6 react 实践的技术图](https://github.com/dvajs/dva-knowledgemap)
-
-[dva 完成一个中型应用](https://github.com/dvajs/dva-docs/blob/master/v1/zh-cn/tutorial/01-%E6%A6%82%E8%A6%81.md)
-
-[系统引用的UI组件文档 Ant Design of React](https://ant.design/docs/react/introduce)
 
 
 ## 整站配置文件详解
@@ -32,28 +29,30 @@ npm Build 开始构建压缩
 
 header 管理系统头部配置(必要属性)
 
-* title    String  管理系统显示的标题
-* icon     String  管理系统显示的icon 可在 [icon](https://ant.design/components/icon/)
-* style    Object  自定义设置头部样式
+* title    管理系统显示的标题
+* icon     管理系统显示的icon可在 [icon](https://ant.design/components/icon/) 查看
+* style    自定义设置头部样式
     
 sider  管理后台侧栏配置(必要属性)
 
-* menu         Array object   sider列表 实现单层or多层级展现
-- title   展现的title
-- key     sider中对应的选项（若为菜单主项，则在openKeys中使用选择是否打开，若为功能项，则对应 selectedKey，以及 main 中 components 值）
-- icon    展现的icon选项（可选）
-- items   功能栏目列表（可选 可设置多层结构）
-* openKeys     Array   默认展开的sider主导航项目（对应menu项目主栏目中的key）
-* selectedKey  String  默认打开的目标功能页面key（对应menu项目功能栏目中的key）
-* style        Object  自定义样式  
+* menu  sider列表 实现单层or多层级展现
+    - title   展现的title
+    - key     sider中对应的选项（若为菜单主项，则在openKeys中使用选择是否打开，若为功能项，则对应 selectedKey，以及 main 中 components 值）
+    - icon    展现的icon选项（可选）
+    - items   功能栏目列表（可选 可设置多层结构）
+
+* openKeys      默认展开的sider主导航项目（对应menu项目主栏目中的key）
+* selectedKey   默认打开的目标功能页面key（对应menu项目功能栏目中的key）
+* style         自定义样式  
     
 main  功能区域配置
 
-* components   Object  配置sider对应功能区域组件
-- FeatureKey     Object  对应sider menu 中的功能key对应功能组件
-title        String  功能区域标题显示名称
-component    require 加载对应功能区域的feature模块
-* style        Object  配置样式  
+* components    配置sider对应功能区域组件
+    - FeatureKey     Object  对应sider menu 中的功能key对应功能组件
+    
+* title           功能区域标题显示名称
+* component       加载对应功能区域的feature模块
+* style         配置样式  
     
     // header 示例 
     header: {
@@ -350,5 +349,15 @@ component    require 加载对应功能区域的feature模块
         ],
 
     }
+
+
+## 学习文档
+
+[ES6 react 实践的技术图](https://github.com/dvajs/dva-knowledgemap)
+
+[dva 完成一个中型应用](https://github.com/dvajs/dva-docs/blob/master/v1/zh-cn/tutorial/01-%E6%A6%82%E8%A6%81.md)
+
+[系统引用的UI组件文档 Ant Design of React](https://ant.design/docs/react/introduce)
+
 
 bibibibi~ 改版中！！！！！！！！！！！！！！！！
