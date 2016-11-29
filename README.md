@@ -27,13 +27,24 @@ npm Build 开始构建压缩
 
 需配置整体的后台系统数据，以及自定义的配置数据
 
-header 管理系统头部配置(必要属性)
+** header 管理系统头部配置(必要属性) **
 
 * title    管理系统显示的标题
 * icon     管理系统显示的icon可在 [icon](https://ant.design/components/icon/) 查看
 * style    自定义设置头部样式
+
+        // header 示例 
+        header: {
+            title: "测试配置管理后台",
+            icon: "appstore",
+            style: {
+                padding: "15px 15px 15px 25px",
+                borderBottom: "1px solid #E9E9E9",
+                backgroundColor: "#F5F5F5"
+            }
+        }
     
-sider  管理后台侧栏配置(必要属性)
+** sider  管理后台侧栏配置(必要属性) **
 
 * menu  sider列表 实现单层or多层级展现
     - title   展现的title
@@ -43,9 +54,51 @@ sider  管理后台侧栏配置(必要属性)
 
 * openKeys      默认展开的sider主导航项目（对应menu项目主栏目中的key）
 * selectedKey   默认打开的目标功能页面key（对应menu项目功能栏目中的key）
-* style         自定义样式  
+* style         自定义样式
+
+        // sider 边栏导航配置示例 
+        sider: {
+            // 层级列表
+            menu: [
+                {   
+                    // 多级
+                    title: "导航1", // 主导航名称
+                    key: "subTitle1",
+                    icon: "setting",
+                    items: [
+                        {title: "选项1", key: "Feature1"},
+                        {title: "选项2", key: "Feature2"},
+                        {title: "选项3", key: "Feature3"},
+                        {   
+                            title: "导航3",
+                            key: "subTitle3",
+                            icon: "",
+                            items: [
+                                {title: "选项6", key: "Feature6"},
+                                {title: "选项7", key: "Feature7"},
+                                {title: "选项8", key: "Feature8"}
+                            ]
+                        }
+                    ]
+                },{
+                    // 单级
+                    title: "选项5",
+                    key: "Feature5"
+                }
+            ],
+            // 默认打开的导航项目
+            openKeys:['subTitle1'],
+
+            // 默认功能页
+            selectedKey: "Feature1",
+
+            // 自定义样式
+            style: {
+                backgroundColor: "#F5F5F5"
+            }
+        }
     
-main  功能区域配置
+** main  功能区域配置 **
 
 * components    配置sider对应功能区域组件
     - FeatureKey     Object  对应sider menu 中的功能key对应功能组件
@@ -54,6 +107,27 @@ main  功能区域配置
 * component       加载对应功能区域的feature模块
 * style         配置样式  
 
+        // main 示例 
+        main: {
+            components: {
+                // key 值对应 sider item中功能选项的 key
+                "Feature1": { 
+                    // 功能区域标题显示名称
+                    title: 'table 数据展示',
+                    // require 加载对应功能区域的feature模块
+                    component: require('./components/feature/Feature1')
+                },
+                "Feature2": {
+                    title: 'simple对象 数据展示',
+                    component: require('./components/feature/Feature2')
+                }
+            },
+            style: {
+                backgroundColor: "#F5F5F5"
+            } 
+        }
+
+**整体示例代码**
 
         // header 示例 
         header: {
@@ -107,7 +181,7 @@ main  功能区域配置
                 backgroundColor: "#F5F5F5"
             }
         }
-        
+
         // main 示例 
         main: {
             components: {
@@ -131,7 +205,7 @@ main  功能区域配置
 
 ### src/components/feature/Feature.js
 
-配置单独功能页面的配置文件
+** 配置单独功能页面的配置文件 **
 
 * table数据，单例数据，图标型数据的展现
 * 查询、创建、更新、删除表单自动化处理
@@ -139,21 +213,244 @@ main  功能区域配置
 * 独立的图片上传组件使用
 * 表单元素自定义使用
 
-**必要数据**
+**必要参数**
 
-* type 对于数据展现形式, 目前有 tableList graphList simpleObject 三种类型
-* initData 初始化展现的数据,参数 callback 用于接受获取的数据
+* type  (string)    对于数据展现形式, 目前有 tableList graphList simpleObject 三种类型
+
+        // 对于数据展现形式 目前有 tableList graphList simpleObject 三种类型        
+        type: 'tableList', // tableList graphList simpleObject complexObject 
+
+* initData  (function)    初始化展现的数据,参数 callback 用于接受获取的数据
+
+        // 初始化展现的数据，使用callback 回传列表数据
+        // 需要手动添加唯一id key
+        // callback 组件数据的回调函数(接受列表数据参数)
+        initData: function(callback){
+            // 同步或者异步获取原始数据
+            // 数据需要确认唯一的 key（react 形式）
+            // 若是 table 类型 则每一条数据均需要唯一的 key
+            data.key = data.id;
+            callback(data);
+        }
 
 **table类型 展现数据**
 
-* columns
+* columns   (Array)     数据展现类型为 tableList时，设置table表头字段设置
+
+        // table 列表展现配置
+        // {
+        //      title       table显示表题
+        //      dataIndex   显示数据中的key
+        //      type        展现形式 （string image link）
+        //      render      自定义展现形式 参数 （当前数据，当前对象数据）
+        //      sort        是否需要排序功能
+        //      width       自定义该列宽度 否则等分
+        // }
+        columns: [
+            {
+                title: 'DOCID',     // table header 文案
+                dataIndex: 'docid', // 数据对象内的属性，也做react vdom 的key
+                type: 'string',     // table 内显示的类型
+                sort: true,         // 是否需要排序
+                width:200,
+                render: (text, item) => ( <span>
+                                        <a href={text}>{item.name}</a>
+                                    </span>),
+            },
+            // type为operate含有特殊含义 自动化的更新与删除，以及自定义操作回调函数
+            // 为特殊的操作字段
+            {
+                title: '操作',
+                type: 'operate',    // 操作的类型必须为 operate
+                width: 120,
+                btns: [{
+                        text: '更新',
+                        type: 'update'
+                    },{
+                        text: '删除',
+                        type: 'delete'
+                    }, {
+                        text: '展示',
+                        callback: function(item){
+                            console.log(item)
+                        }
+                    }
+                }]
+            }
+        ]
+
+**table类型 查询更新列表数据**
+
+* RType    Array   展现的填写表单的数据字段。类型含有示例中的形式
+        
+        // table 查询字段
+        // {
+        //      name        字段的name值
+        //      label       字段的展现内容
+        //      type        字段类型 （string date select cascader radio checkbox switch imageUpload）
+        //      placeholder input的placeholder内容
+        // }
+        RType: [
+            {
+                name: 'id',
+                label: '唯一标识',
+                type: 'string',
+                placeholder: '请输入标示名称'
+            },{
+                name: 'date',
+                label: '项目开始时间',
+                type: 'date'
+            },{
+                name: 'stype',
+                label: '项目类型Select',
+                type: 'select',
+                defaultValue: 'one',
+                options:[{
+                    text: '选项一',
+                    value: 'one'
+                },{
+                    text: '选项二',
+                    value: 'two'
+                },{
+                    text: '选项三',
+                    value: 'three'
+                }]
+            },{
+                name: 'rtype',
+                label: '项目类型Radio',
+                type: 'radio',
+                defaultValue: 'one',
+                options:[{
+                    text: '选项一',
+                    value: 'one'
+                },{
+                    text: '选项二',
+                    value: 'two'
+                },{
+                    text: '选项三',
+                    value: 'three'
+                }]
+            },{
+                name: 'ischange',
+                label: '是否过滤',
+                type: 'switch',
+                defaultValue: false
+            }
+
+        ]  
+
+* Retrieve    function    对于确认创建数据接口上报创建回调的函数
+
+        Retrieve: function(data, callback){
+            // 处理对于列表查询的数据请求
+            console.log(data);
+            
+            // 查询成功之后执行callback回调
+            // 同步或者异步获取原始数据
+            // 数据需要确认唯一的 key（react 形式）
+            // 若是 table 类型 则每一条数据均需要唯一的 key
+            list.key = list.id;
+            callback(list);
+        }
 
 **table类型 创建数据**
 
 当数据类型为table 并且含有创建新数据的需求时
 
 * CType    Array   展现的填写表单的数据字段。类型含有示例中的形式
-* Create
+        
+        // table 创建新数据字段
+        // {
+        //      name        字段的name值
+        //      label       字段的展现内容
+        //      type        字段类型 （string date select cascader radio checkbox switch imageUpload）
+        //      placeholder input的placeholder内容
+        // }
+        CType: [
+            {
+                name: 'docid',
+                label: '唯一标识',
+                type: 'string',
+                placeholder: '请输入标示名称'
+            },{
+                name: 'date',
+                label: '日期',
+                type: 'date'
+            },{
+                name: 'img',
+                label: '图片',
+                type: 'imageUpload'
+            }
+        ]    
+
+* Create    function    对于确认创建数据接口上报创建回调的函数
+
+        Create: function(data, callback){
+            // 处理对于数据请求的创建
+            console.log(data);
+            
+            // 创建成功之后执行callback回调
+            callback();
+        }
+
+**table类型 更新数据**
+
+当数据类型为table 并且含有更新数据的需求时
+
+* UType    Array   展现的填写表单的数据字段。类型含有示例中的形式（类似创建数据）
+        
+        // table 更新数据字段
+        // {
+        //      name        字段的name值
+        //      label       字段的展现内容
+        //      type        字段类型 （string date select cascader radio checkbox switch imageUpload）
+        //      placeholder input的placeholder内容
+        // }
+        CType: [
+            {
+                name: 'docid',
+                label: '唯一标识',
+                type: 'string',
+                placeholder: '请输入标示名称'
+            },{
+                name: 'date',
+                label: '日期',
+                type: 'date'
+            },{
+                name: 'img',
+                label: '图片',
+                type: 'imageUpload'
+            }
+        ]    
+
+* Update    function    对于确认创建数据接口上报创建回调的函数
+
+        Update: function(data, callback){
+            // 处理对于数据请求的更新
+            console.log(data);
+            
+            // 更新成功之后执行callback回调
+            callback();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         {   
             // 对于数据展现形式 目前有 tableList graphList simpleObject 三种类型
