@@ -17,41 +17,42 @@ const oneDate = {
 
 const table2List = [
     {
-        id: "5",
+        id: "1",
         title: "111111互联网金融最强监管政策来袭，行业强化约束正本清源",
-        url: "http://news.xhby.net/system/2016/09/18/029642755.shtml",
+        link: "http://news.xhby.net/system/2016/09/18/029642755.shtml",
         nid: "13606399328377680923",
         insert_time: "2016-09-19 19:31:40",
         update_time: "2016-09-19 19:32:10"
     }, {
-        id: "4",
+        id: "2",
         title: "互联网金融最强监管政策来袭，行业强化约束正本清源",
-        url: "http://news.xhby.net/system/2016/09/18/029642755.shtml",
+        link: "http://news.xhby.net/system/2016/09/18/029642755.shtml",
         nid: "13606399328377680923",
         insert_time: "2016-09-19 19:30:39",
         update_time: "2016-09-19 19:30:39"
     }, {
         id: "3",
         title: "互联网金融最强监管政策来袭，行业强化约束正本清源",
-        url: "http://news.xhby.net/system/2016/09/18/029642755.shtml",
+        link: "http://news.xhby.net/system/2016/09/18/029642755.shtml",
         nid: "13606399328377680923",
         insert_time: "2016-09-19 19:30:31",
         update_time: "2016-09-19 19:30:31"
     }, {
-        id: "2",
+        id: "4",
         title: "互联网金融最强监管政策来袭，行业强化约束正本清源",
-        url: "http://news.xhby.net/system/2016/09/18/029642755.shtml",
+        link: "http://news.xhby.net/system/2016/09/18/029642755.shtml",
         nid: "13606399328377680923",
         insert_time: "2016-09-19 18:07:44",
         update_time: "2016-09-19 18:07:44"
     }, {
-        id: "1",
+        id: "5",
         title: "互联网金融最强监管政策来袭，行业强化约束正本清源",
-        url: "http://news.xhby.net/system/2016/09/18/029642755.shtml",
+        link: "http://news.xhby.net/system/2016/09/18/029642755.shtml",
         nid: "13606399328377680923",
         insert_time: "2016-09-19 18:07:29",
         update_time: "2016-09-19 18:07:29"
-    }];
+    }
+];
 
 const graphList = [
     {
@@ -133,7 +134,8 @@ const simpleObject = {
 function createArrDate(data, times){
     let arr =[];
     for (; times >= 0; times--) {
-        arr.push(data);
+        data.id = times;
+        arr.push(JSON.parse(JSON.stringify(data)));
     }
     return arr;
 }
@@ -172,6 +174,31 @@ module.exports = {
             res.json({
                 success: true,
                 data: graphList,
+            });
+        }, 500);
+    },
+
+    'GET /api/oneList': function (req, res) {
+        setTimeout(function () {
+            res.json({
+                success: true,
+                data: [{
+                    date:"2016-06-29 10:27:00",
+                    id:"ddassad",
+                    email:"asd@22.cn",
+                    image:"",
+                    ischange:"false",
+                    rtype:"one",
+                    stype:"one",
+                }],
+            });
+        }, 500);
+    },
+
+    'GET /api/delete': function (req, res) {
+        setTimeout(function () {
+            res.json({
+                success: true
             });
         }, 500);
     },

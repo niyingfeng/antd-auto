@@ -50,80 +50,28 @@ const conf = {
                 callback: function(item){
                     console.log(item)
                 }
+            },{
+                text: '删除',
+                type: 'delete'
             }], // 可选
         }
     ],
-
-    // 可设置的查询字段
-    RType:[
-        {
-            name: 'id',
-            label: '唯一标识',
-            type: 'string',
-            placeholder: '请输入标示名称'
-        },{
-            name: 'date',
-            label: '项目开始时间',
-            type: 'date'
-        },{
-            name: 'stype',
-            label: '项目类型Select',
-            type: 'select',
-            defaultValue: 'one',
-            options:[{
-                text: '选项一',
-                value: 'one'
-            },{
-                text: '选项二',
-                value: 'two'
-            },{
-                text: '选项三',
-                value: 'three'
-            }]
-        },{
-            name: 'rtype',
-            label: '项目类型Radio',
-            type: 'radio',
-            defaultValue: 'one',
-            options:[{
-                text: '选项一',
-                value: 'one'
-            },{
-                text: '选项二',
-                value: 'two'
-            },{
-                text: '选项三',
-                value: 'three'
-            }]
-        },{
-            name: 'ischange',
-            label: '是否过滤',
-            type: 'switch',
-            defaultValue: false
-        }
-
-    ],
-    // 查询操作回调
-    Retrieve: function(data, callback){
-
+    // 删除操作
+    Delete: function(data, callback){
+        // 删除操作
         console.log(data);
 
         Reqwest({
-            url: '/api/example2',
+            url: '/api/delete',
             data: {},
 
             type: 'json',
             success: function (data) {
-                let list = data.data;
-                let i = 0;
-                list.forEach(function(ele) {
-                    ele.key = i++;
-                });
-
-                // 查询成功 传入列表数据
-                callback(list);
+                // 模拟请求删除成功的回调
+                callback();
             }
         });
+           
     }
 
 };

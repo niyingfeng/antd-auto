@@ -3,6 +3,7 @@ import React from 'react';
 
 import FeatureSetConfig from '../common/FeatureSetConfig';
 import Reqwest from 'reqwest';
+import {message} from 'antd';
 
 const graph_conf = {
     
@@ -55,21 +56,15 @@ const graph_conf = {
         }
        
        // 模拟数据
-       Reqwest({
-            url: '/api/example4',
-            data: {},
+       setTimeout(function(){
+            option.series = testData.graphList;
+            option.series.forEach(function(item) {
+                item.type = 'line';
+                item.stack = '总量'
+            });
 
-            type: 'json',
-            success: function (data) {
-                option.series = data.data;
-                option.series.forEach(function(item) {
-                    item.type = 'line';
-                    item.stack = '总量';
-                });
-
-                callback(option);
-            }
-        });
+            callback(option);
+       }, 1000)
     }
 
 };
@@ -132,7 +127,7 @@ const graph_conf2 = {
             ]
 
             callback(option);
-       }, 3000)
+       }, 1000)
     }
 
 };
@@ -218,21 +213,80 @@ const graph_conf3 = {
             }]
 
             callback(option);
-       }, 6000)
+       }, 1000)
     }
 
 };
 
-const Feature1 = FeatureSetConfig(graph_conf);
-const Feature2 = FeatureSetConfig(graph_conf2);
-const Feature3 = FeatureSetConfig(graph_conf3);
+const table_conf = {
+    
+    type: 'tableList', // tableList graphList simpleObject complexObject 
+
+    // 初始化展现的数据，使用callback 回传列表数据
+    // 需要手动添加唯一id key
+    // callback 组件数据的回调函数(接受列表数据参数)
+    initData: function(callback){
+       
+        // 模拟数据
+        Reqwest({
+            url: '/api/example',
+            data: {},
+
+            type: 'json',
+            success: function (data) {
+                let list = data.data;
+                list.forEach(function(ele) {
+                    ele.key = Math.random();
+                });
+                callback(list);
+            }
+        });
+    },
+        
+    columns: [
+        {
+            title: 'DOCID',     // table header 文案
+            dataIndex: 'docid', // 数据对象内的属性，也做react vdom 的key
+            type: 'string',     // table 内显示的类型
+            sort: true,         // 是否需要排序
+            width:200
+        }, {
+            title: '标题',
+            dataIndex: 'title',
+            type: 'string'
+        }, {
+            title: '链接',
+            dataIndex: 'link',
+            type: 'link',
+            render: (text) => ( <span>
+                                    <a href={text} target='_blank'>链接</a>
+                                </span>),
+            width: 50
+        },{
+            title: '日期',
+            dataIndex: 'date',
+            type: 'string',
+            width: 150
+        },{
+            title: '图片',
+            dataIndex: 'img',
+            type: 'image'
+        }
+    ]
+
+};
+
+const Feature1 = FeatureSetConfig(graph_conf2);
+const Feature2 = FeatureSetConfig(graph_conf3);
+const Feature3 = FeatureSetConfig(table_conf);
 
 const Feature = (props) => {
-    return  <div>
-                <Feature1  className={props.className}/>
-                <Feature2  className={props.className}/>
-                <Feature3  className={props.className}/>
-            </div>;
+
+        return  <div>
+                    <Feature1 className={props.className}/>
+                    <Feature2 className={props.className}/>
+                    <Feature3 className={props.className}/>
+                </div>
 }
 
 export default Feature;

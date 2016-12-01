@@ -2,69 +2,106 @@
 import React from 'react';
 
 import FeatureSetConfig from '../common/FeatureSetConfig';
-import Reqwest from 'reqwest';
 
+import Immutable from 'immutable';
+import Reqwest from 'reqwest';
 
 const conf = {
     
     // 初始化页面的数据 回调函数传入 items 列表
     initData: function(callback){
 
+        // 接口调用数据形式
         Reqwest({
-            url: '/api/example',
+            url: '/api/oneList',
             data: {},
 
             type: 'json',
             success: function (data) {
                 let list = data.data;
-                let i = 0;
                 list.forEach(function(ele) {
-                    ele.key = i++;
+                    ele.key =  ele.id;
                 });
                 callback(list);
             }
         });
            
     },
-    
-    // table 表单字段
+
     columns: [
         {
-            title: 'KEY',     // table header 文案
-            dataIndex: 'key', // 数据对象内的属性，也做react vdom 的key
-            type: 'string',     // table 内显示的类型
-            sort: true,         // 是否需要排序
-        }, {
-            title: '标题',
-            dataIndex: 'title',
+            title: 'ID',
+            dataIndex: 'id',
             type: 'string'
         }, {
-            title: '链接',
-            dataIndex: 'link',
-            type: 'link'
+            title: '邮箱',
+            dataIndex: 'email',
+            type: 'string'
         }, {
+            title: '日期',
+            dataIndex: 'date',
+            type: 'string'
+        },{
+            title: '图片',
+            dataIndex: 'image',
+            type: 'image'
+        },{
+            title: 'ischange',
+            dataIndex: 'ischange',
+            type: 'string'
+        },{
+            title: 'rtype',
+            dataIndex: 'rtype',
+            type: 'string'
+        },{
+            title: 'stype',
+            dataIndex: 'stype',
+            type: 'string'
+        },{
             title: '操作',
             type: 'operate',    // 操作的类型必须为 operate
             btns: [{
-                text: 'console输出',
+                text: '更新',
+                type: 'update'
+            },{
+                text: '展示',
                 callback: function(item){
                     console.log(item)
                 }
             }], // 可选
+            
         }
     ],
+    
+    
+    Update:function(data, callback){
+        console.log(data);
 
-    // 可设置的查询字段
-    RType:[
+        // 这块请求更新数据 成功回调
+        data.key =  data.id;
+        callback(data);
+    },
+  
+
+    // 创建项目所需的字段 与 更新项目所需的字段
+    // rules 规范可见 https://github.com/yiminghe/async-validator
+    UType: [
         {
             name: 'id',
             label: '唯一标识',
             type: 'string',
-            placeholder: '请输入标示名称'
+            placeholder: '请输入标示名称',
+            rules: [{ required: true, min: 5, message: '用户名至少为 5 个字符' }]
+        },{
+            name: 'email',
+            label: '唯一标识',
+            type: 'string',
+            placeholder: '请输入标示名称',
+            rules: [{ required: true, type: 'email', message: '请输入正确的邮箱地址' }]
         },{
             name: 'date',
             label: '项目开始时间',
-            type: 'date'
+            type: 'date',
         },{
             name: 'stype',
             label: '项目类型Select',
@@ -98,33 +135,13 @@ const conf = {
         },{
             name: 'ischange',
             label: '是否过滤',
-            type: 'switch',
-            defaultValue: false
+            type: 'switch'
+        },{
+            name: 'image',
+            label: '背景图片',
+            type: 'imageUpload'
         }
-
-    ],
-    // 查询操作回调
-    Retrieve: function(data, callback){
-
-        console.log(data);
-
-        Reqwest({
-            url: '/api/example2',
-            data: {},
-
-            type: 'json',
-            success: function (data) {
-                let list = data.data;
-                let i = 0;
-                list.forEach(function(ele) {
-                    ele.key = i++;
-                });
-
-                // 查询成功 传入列表数据
-                callback(list);
-            }
-        });
-    }
+    ]
 
 };
 

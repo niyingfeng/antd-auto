@@ -274,6 +274,8 @@ npm Build 开始构建压缩
                         callback: function(item){
                             console.log(item)
                         }
+                    }, {
+                        render: (text, item) => (<CopyClipboard title='复制链接' type='link' data={item.url} />)
                     }
                 }]
             }

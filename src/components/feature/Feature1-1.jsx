@@ -24,7 +24,7 @@ const table_conf = {
             success: function (data) {
                 let list = data.data;
                 list.forEach(function(ele) {
-                    ele.key = Math.random();
+                    ele.key = ele.id;
                 });
                 callback(list);
             }
@@ -44,12 +44,20 @@ const table_conf = {
     // table 列表头标题
     columns: [
         {
+            title: 'ID',     // table header 文案
+            dataIndex: 'id', // 数据对象内的属性，也做react vdom 的key
+            type: 'string',     // table 内显示的类型
+            sort: true,         // 是否需要排序
+        },{
             title: 'DOCID',     // table header 文案
             dataIndex: 'docid', // 数据对象内的属性，也做react vdom 的key
             type: 'string',     // table 内显示的类型
             sort: true,         // 是否需要排序
-            width:200
         }, {
+            title: '来源',
+            dataIndex: 'source',
+            type: 'string'
+        },{
             title: '标题',
             dataIndex: 'title',
             type: 'string'
@@ -60,13 +68,12 @@ const table_conf = {
             render: (text) => ( <span>
                                     <a href={text} target="_blank">链接</a>
                                 </span>),
-            width: 50
         },{
             title: '日期',
             dataIndex: 'date',
             type: 'string',
-            width: 150
-        },{
+        },
+        {
             title: '图片',
             dataIndex: 'image',
             type: 'image'
