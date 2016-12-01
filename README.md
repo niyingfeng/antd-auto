@@ -5,7 +5,7 @@
 ## Start
 npm start 开始本地调试项目 开启 便可以看到整体 DEMO 项目
 
-![image](http://image.freefe.cc/20161123144536.png)
+![image](http://image.freefe.cc/20161201144536.png)
 
 ## Build
 npm Build 开始构建压缩
