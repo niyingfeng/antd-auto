@@ -1,6 +1,16 @@
 # antd-auto  自动化CMS系统框架(文档创建中)
 
-项目介绍，本项目主要是为了解决前端对于各类CMS系统开发的效率提升，不在收到CMS系统开发的包括组件，逻辑，展现等重复工作量。
+本项目主要是为了解决前端对于各类CMS系统开发的效率提升，不在收到CMS系统开发的包括组件，逻辑，展现等重复工作量。
+
+## Start
+npm start 开始本地调试项目 开启 便可以看到整体 DEMO 项目
+
+![image](http://image.freefe.cc/20161123144536.png)
+
+## Build
+npm Build 开始构建压缩
+
+## 项目介绍
 
 1. 实现前端只需提供数据便可以实现各种数据展现，包括table，simple objest，以及各类图形展现（引入echarts）
 2. 提供数据操作接口，前端只需关心数据的接受与传递，便可以实现数据的增删改查，而无需再关心CMS内部的实现。暂时实现 table数据的增删改查，simple object数据的修改等
@@ -11,15 +21,6 @@
 1. 基于 dva 脚手架
 2. 基于 antd 2.0 UI组件
 3. 优化组织结构，优化代码，倾向于使用组件的 Stateless Functional Component 
-
-## Start
-npm start 开始本地调试项目 开启 便可以看到整体 DEMO 项目
-
-![image](http://image.freefe.cc/20161123144536.png)
-
-## Build
-npm Build 开始构建压缩
-
 
 ## 整站配置文件详解
 
