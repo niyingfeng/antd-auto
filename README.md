@@ -9,6 +9,8 @@ npm start 开始本地调试项目 开启 便可以看到整体 DEMO 项目
 
 ## Build
 npm Build 开始构建压缩
+由于 alicdn 对部分域名有访问限制，或者需要内网环境使用 在部署上线的时候需要注意下载字体自行部署
+本项目修改 src/css/customfont.less 即可
 
 ## 项目介绍
 
@@ -18,8 +20,8 @@ npm Build 开始构建压缩
 
 项目对于前期优化
 
-1. 基于 dva 脚手架
-2. 基于 antd 2.0 UI组件
+1. 基于 dva 脚手架 [dva文档](https://github.com/dvajs/dva)
+2. 基于 antd 2.0 UI组件 [ant.design文档](https://ant.design/docs/react/introduce)
 3. 优化组织结构，优化代码，倾向于使用组件的 Stateless Functional Component 
 
 ## 整站配置文件详解

@@ -7,15 +7,18 @@
     "antd": "^2.3.0",
     "babel-plugin-import": "^1.0.1",
     "bce-sdk-js": "^0.1.7",
+    "components": "^0.1.0",
     "dva": "^1.0.0",
     "echarts-for-react": "^1.1.5",
+    "font": "0.0.4",
     "immutable": "^3.8.1",
     "moment": "^2.15.2",
     "react": "^15.1.0",
     "react-copy-to-clipboard": "^4.2.3",
     "react-dom": "^15.1.0",
     "react-tinymce": "^0.5.1",
-    "reqwest": "^2.0.5"
+    "reqwest": "^2.0.5",
+    "src": "^1.1.2"
   },
   "devDependencies": {
     "atool-build": "^0.7.6",

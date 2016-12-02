@@ -1,6 +1,22 @@
-
 :global {
-  html, body, #root {
-    height: 100%;
-  }
+    html, body, #root {
+        height: 100%;
+    }
 }
+
+
+
+/*  尼玛好无语 阿里的cdn 对百度域名屏蔽 字体扔到百度自己的服务器上处理 
+    并且这边使用了 dva css modules 的形式 无法使用antd 1.X 时候的兼容方案
+    只能这么处理， 如果阿里的cdn为对你的域名屏蔽 那么可以注销下面这一段
+*/
+
+@font-face {
+    font-family: 'anticon';
+    src: url('http://webapp.bdstatic.com/webapp/libs/iconfont2/iconfont.eot');
+    /* IE9*/
+    src: url('http://webapp.bdstatic.com/webapp/libs/iconfont2/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('http://webapp.bdstatic.com/webapp/libs/iconfont2/iconfont.woff') format('woff'), /* chrome、firefox */ url('http://webapp.bdstatic.com/webapp/libs/iconfont2/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/ url('http://webapp.bdstatic.com/webapp/libs/iconfont2/iconfont.svg#iconfont') format('svg');
+    /* iOS 4.1- */
+}
+
+

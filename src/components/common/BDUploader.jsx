@@ -4,6 +4,7 @@
  * <BDUploader success={this.uploadImgSuccess} /> 
  */
 
+// 对于各个项目 重新定义图片上线组件接口 调整回调形式
 
 import React from 'react';
 import { Button, Icon, message } from 'antd';
