@@ -30,7 +30,7 @@ npm Build 开始构建压缩
 
 需配置整体的后台系统数据，以及自定义的配置数据
 
-** header 管理系统头部配置(必要属性) **
+**header 管理系统头部配置(必要属性)**
 
 * title    管理系统显示的标题
 * icon     管理系统显示的icon可在 [icon](https://ant.design/components/icon/) 查看
@@ -49,7 +49,7 @@ npm Build 开始构建压缩
 
 ![image](http://image.freefe.cc/20161205140700.png)
     
-** sider  管理后台侧栏配置(必要属性) **
+**sider  管理后台侧栏配置(必要属性)**
 
 * menu  sider列表 实现单层or多层级展现
     - title   展现的title
@@ -105,7 +105,7 @@ npm Build 开始构建压缩
 
 ![image](http://image.freefe.cc/20161205140735.png)
 
-** main  功能区域配置 **
+**main  功能区域配置**
 
 * components    配置sider对应功能区域组件
     - FeatureKey     Object  对应sider menu 中的功能key对应功能组件
@@ -214,7 +214,7 @@ npm Build 开始构建压缩
 
 ### src/components/feature/Feature.js
 
-** 配置单独功能页面的配置文件 **
+**配置单独功能页面的配置文件**
 
 * table数据，单例数据，图标型数据的展现
 * 查询、创建、更新、删除表单自动化处理
