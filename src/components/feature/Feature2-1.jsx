@@ -24,60 +24,50 @@ const simple_conf = {
         });
     },
 
-    UType:[
+
+    // {
+    //      title       显示表题
+    //      dataIndex   显示数据中的key
+    //      type        展现形式 （string image link）
+    //      render      自定义展现形式 参数 （当前数据，当前对象数据）
+    // }
+
+    columns:[
         {
-            name: 'docid',
-            label: '唯一标识',
-            type: 'string',
-            placeholder: '请输入标示名称'
-        },{
-            name: 'title',
-            label: '标题',
-            type: 'string',
-            placeholder: '请输入标示名称'
-        },{
-            name: 'link',
-            label: '链接',
+            title: '唯一标识',
+            dataIndex: 'docid',
             type: 'string'
         },{
-            name: 'stype',
-            label: '项目类型Select',
-            type: 'select',
-            options:[{
-                text: '选项一',
-                value: 'one'
-            },{
-                text: '选项二',
-                value: 'two'
-            },{
-                text: '选项三',
-                value: 'three'
-            }],
-            width: 150
+            title: '标题',
+            dataIndex: 'title',
+            type: 'string'
         },{
-            name: 'date',
-            label: '日期',
-            type: 'date'
+            title: '链接',
+            dataIndex: 'link',
+            type: 'link'
+            // render: (text) => ( <span>
+            //                 <a href={text} target="_blank">{text}</a>
+            //             </span>)
         },{
-            name: 'image',
-            label: '图片',
-            type: 'imageUpload'
+            title: '日期',
+            dataIndex: 'date',
+            type: 'string'
+        },{
+            title: '图片',
+            dataIndex: 'image',
+            type: 'image'
         }
     ],
 
     operate:[
         {
-            text: '确认数据',
+            text: '编辑数据',
             style: {
-                'marginRight': '30px'
+                'marginLeft': '80px'
             },
             callback: function(item){
-                console.log(item)
-            }
-        }, {
-            text: '展示数据',
-            callback: function(item){
-                console.log(item)
+                console.log(item);
+                location.hash = '#Feature2-2';
             }
         }
     ]

@@ -58,7 +58,9 @@ const Config = {
                 key: "echarts",
                 icon: "bars",
                 items: [
-                    {title: "数据可视化展示项", key: "Feature3-1"}
+                    {title: "echarts 数据可视化1", key: "Feature3-1"},
+                    {title: "echarts 数据可视化2", key: "Feature3-2"},
+                    {title: "echarts 数据可视化3", key: "Feature3-3"}
                 ]
             },
             {
@@ -150,10 +152,18 @@ const Config = {
             "Feature2-2": {
                 title: 'simple对象数据修改操作',
                 component: require('./components/feature/Feature2-2')
-            }, 
+            },
             "Feature3-1": {
                 title: '数据可视化 数据展示',
                 component: require('./components/feature/Feature3-1')
+            },
+            "Feature3-2": {
+                title: '数据可视化 数据展示',
+                component: require('./components/feature/Feature3-2')
+            }, 
+            "Feature3-3": {
+                title: '数据可视化 数据展示',
+                component: require('./components/feature/Feature3-3')
             }, 
             "Feature4-1": {
                 title: '综合数据展示',

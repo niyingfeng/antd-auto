@@ -29,22 +29,6 @@ const simple_conf = {
         callback(data);
     },
 
-    operate:[
-        {
-            text: '确认修改',
-            type: 'update',
-            style: {
-                'marginRight': '30px',
-                'marginLight': '80px'
-            }
-        }, {
-            text: '展示数据',
-            callback: function(item){
-                console.log(item)
-            }
-        }
-    ],
-
     UType:[
         {
             name: 'docid',
@@ -69,7 +53,25 @@ const simple_conf = {
             label: '图片',
             type: 'imageUpload'
         }
+    ],
+
+    operate:[
+        {
+            text: '确认修改',
+            type: 'update',
+            style: {
+                'marginRight': '30px',
+                'marginLeft': '80px'
+            }
+        }, {
+            text: '展示数据',
+            callback: function(item){
+                console.log(item)
+            }
+        }
     ]
+
+    
 }
 
 const Feature1 = FeatureSetConfig(simple_conf);

@@ -9,8 +9,8 @@ npm start 开始本地调试项目 开启 便可以看到整体 DEMO 项目
 
 ## Build
 npm Build 开始构建压缩
-由于 alicdn 对部分域名有访问限制，或者需要内网环境使用 在部署上线的时候需要注意下载字体自行部署
-本项目修改 src/css/customfont.less 即可
+如果 alicdn 对部分域名有访问限制，或者需要内网环境使用 在部署上线的时候需要注意下载字体自行部署
+本项目修改 index.less 的 @font-face 即可
 
 ## 项目介绍
 

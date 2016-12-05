@@ -1,3 +1,6 @@
+// 表单独立项 用于对于表单字段的创建
+
+
 import React from 'react';
 import moment from 'moment';
 import { Form, Select, Input, Button, Icon , DatePicker, TimePicker, Radio, Switch, Cascader, Checkbox } from 'antd';
@@ -129,11 +132,11 @@ let CFormItem = React.createClass({
                             label={item.label}
                             key={item.name}
                             {...formItemLayout}>
-                            <img className="uploadImg" src={defaultValue} />
 
                             {getFieldDecorator(item.name, { initialValue:defaultValue})(
                                 <Input onChange={this.changeImgUrl} />
                             )}
+                            <img className="uploadImg" src={defaultValue}  style={{marginTop:"15px"}}/>
 
                             <BDUploader success={this.uploadSuccess} />
                         </FormItem>

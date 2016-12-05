@@ -12,6 +12,8 @@ import Immutable from 'immutable';
 import Reqwest from 'reqwest';
 
 import CFormItem from './CreateFormItem';
+import CTextItem from './CreateTextItem';
+
 // 搜索查询栏form 创建新item-form 更新form 
 import UForm from './UpdateForm';
 import CForm from './CreateForm';
@@ -289,15 +291,25 @@ const FeatureSet = (config) => {
                             {
                                 this.state.loading?
                                     <div className="formLayout">
-                                        <Spin size="large" />
+                                        <Spin size="large" style={{"marginTop":"50px"}}/>
                                     </div>:
                                     ''
                             }
                             { 
-                                config.UType.map(function(item){
-                                    item.defaultValue = itemInfo[item.name]||'';
-                                    return <CFormItem key={item.name} getFieldDecorator={getFieldDecorator} formItemLayout={formItemLayout} item={item}/>
-                                })
+                                config.columns?
+                                    config.columns.map(function(item){
+                                        item.value = itemInfo[item.dataIndex]||'';
+                                        return <CTextItem key={item.dataIndex} formItemLayout={formItemLayout} item={item}/>
+                                    }):
+                                    ''
+                            }
+                            { 
+                                config.UType?
+                                    config.UType.map(function(item){
+                                        item.defaultValue = itemInfo[item.name]||'';
+                                        return <CFormItem key={item.name} getFieldDecorator={getFieldDecorator} formItemLayout={formItemLayout} item={item}/>
+                                    }):
+                                    ''
                             }
                         </Form>
                         { 
@@ -328,19 +340,14 @@ const FeatureSet = (config) => {
             let itemI = Immutable.fromJS(this.props.form.getFieldsValue());
 
             if(btn.type === 'update'){
-
                 const self = this;
-                
 
                 config.Update(itemI.toJS(), function(item){
-
                     message.success('更新成功');
-                    
                     self.setState({
                         item: item
                     });
                 });
-
                
             }else if(btn.callback){
                 btn.callback(itemI.toJS());
