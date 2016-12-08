@@ -2,7 +2,6 @@ import React from 'react';
 import { Form, Button } from 'antd';
 
 import CFormItem from './CreateFormItem';
-import styles from './Common.less';
 
 const FormItem = Form.Item;
 
@@ -12,7 +11,7 @@ let RForm = React.createClass({
         const RType = this.props.RType;
         const { getFieldDecorator } = this.props.form;
         return RType ?
-                (<div className={styles.search}>
+                (<div className="search">
                     <Form inline>
                         { 
                             RType.map(function(item){

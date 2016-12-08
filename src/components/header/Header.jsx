@@ -1,15 +1,13 @@
 import React from 'react';
 import { Affix, Icon } from 'antd';
 
-import styles from './Header.less';
-
 function Header(props){
-    return  <div style={props.style} className={styles.header}>
+    return  <div style={props.style} className="header">
                 <h2>
-                    <Icon className={styles.icon} type={props.icon} />
+                    <Icon className="icon" type={props.icon} />
                     {props.title}
                 </h2>
-                <div className={styles.aver}>
+                <div className="aver">
                     <img src={props.aver} />
                     <span>{props.name}</span>
                 </div>

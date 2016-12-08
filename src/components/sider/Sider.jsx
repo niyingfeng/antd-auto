@@ -2,8 +2,6 @@ import React from 'react';
 import { Menu, Icon } from 'antd';
 import { Link } from 'dva/router';
 
-import styles from './Sider.less';
-
 const MenuItemCreat  = (items) => {
         return items.map(function(item){
             if(item.items){
@@ -23,7 +21,7 @@ const MenuItemCreat  = (items) => {
 };
 
 function Sider(props){
-    return  <div className={styles.sider} style={props.style}>
+    return  <div className="sider" style={props.style}>
                <Menu defaultOpenKeys={props.openKeys}
                     selectedKeys={[props.selectedKey]}
                     mode="inline">

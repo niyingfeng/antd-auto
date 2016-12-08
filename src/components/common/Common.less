@@ -1,47 +1,36 @@
 // 通用组件样式集合
 
-.normal{
+.normal {
     margin-top: 20px;
 }
-.search, .normal{
-    :global(.ant-form-item){
+.search, .normal {
+    .ant-form-item {
         margin-right: 25px;
         margin-bottom: 15px;
-        >label:after {
+        > label:after {
             content: ":";
-            margin: 0 8px 0 2px;
             position: relative;
             top: -.5px;
+            margin: 0 8px 0 2px;
         }
     }
 }
 
-.create{
+.create {
     text-align: right;
 
-    >button{
+    > button {
         margin: 20px 0;
     }
 
-    &:after{
-        content: ' ';
+    &:after {
+        content: " ";
         display: table;
         clear: both;
     }
 }
 
-:global(.ant-table-tbody){
-    tr{
-        td{
-            img{
-                max-height: 100px;
-                margin: 0 auto;
-                display: block;
-            }
-        }
-    }
-}
-
-:global(.ant-form-inline .ant-form-item){
-    margin-right: 30px;
+.uploadImg{
+    max-width: 300px;
+    max-height: 400px;
 }

@@ -5,7 +5,6 @@ import { connect } from 'dva';
 import { Link } from 'dva/router';
 
 import config from '../config';
-import styles from './IndexPage.less';
 
 import Header from '../components/header/Header';
 import Sider from '../components/sider/Sider';
@@ -48,7 +47,7 @@ const App = (props) => {
                         <Main {...mainInfo} {...featureInfo}/>
                     </div>
         }else{
-            return  <div className={styles.nopermission}>
+            return  <div className="nopermission">
                         您暂无权限处理该系统工作，请先
                         <a href={IndexInfo.loginUrl}>登录</a>
                         或者找相关人员申请权限。

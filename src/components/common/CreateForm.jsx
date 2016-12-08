@@ -3,8 +3,6 @@ import { Form, Modal, Button } from 'antd';
 
 import CFormItem from './CreateFormItem';
 
-import styles from './Common.less';
-
 let CForm = React.createClass({
     getInitialState: function() {
         return { visible: false };
@@ -21,7 +19,7 @@ let CForm = React.createClass({
         };
 
         return  CType ?
-                <div className={styles.create}>
+                <div className="create">
                     <Button type="primary" icon="plus-circle-o" onClick={this.showModal}>添加</Button>
                     <Modal title="添加新对象" visible={this.state.visible} onOk={this.handleCreate} onCancel={this.hideModal}>
                         <Form horizontal>

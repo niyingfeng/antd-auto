@@ -1,21 +1,49 @@
-:global {
-    html, body, #root {
-        height: 100%;
+
+@import "~antd/lib/style/themes/default";
+
+//阿里的cdn 对百度域名屏蔽 字体扔到百度自己的服务器上处理
+@icon-url: "http://webapp.bdstatic.com/webapp/libs/iconfont2/iconfont";
+
+@import "~antd/lib/style/core/index.less";
+@import "~antd/lib/style/components.less";
+
+@import "components/header/Header.less";
+@import "components/main/Main.less";
+@import "components/sider/Sider.less";
+@import "components/common/Common.less";
+
+html,
+body,
+#root {
+    height: 100%;
+}
+
+
+
+// 全局从定义样式
+.ant-table-tbody {
+    tr {
+        td {
+            img {
+                display: block;
+                max-height: 100px;
+                margin: 0 auto;
+            }
+        }
     }
 }
 
-
-
-/*  尼玛好无语 阿里的cdn 对百度域名屏蔽 字体扔到百度自己的服务器上处理 
-    并且这边使用了 dva css modules 的形式 无法使用antd 1.X 时候的兼容方案
-    只能这么处理， 如果阿里的cdn为对你的域名屏蔽 那么可以注销下面这一段
-*/
-
-
-@font-face {
-    font-family: 'anticon';
-    src: url('http://webapp.bdstatic.com/webapp/libs/iconfont2/iconfont.eot');
-    src: url('http://webapp.bdstatic.com/webapp/libs/iconfont2/iconfont.eot?#iefix') format('embedded-opentype'), url('http://webapp.bdstatic.com/webapp/libs/iconfont2/iconfont.ttf') format('truetype'), url('http://webapp.bdstatic.com/webapp/libs/iconfont2/iconfont.svg#iconfont') format('svg');
+.ant-form-inline .ant-form-item {
+    margin-right: 30px;
 }
 
-
+.formLayout {
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    background-color: rgba(255, 255, 255, .75);
+}
