@@ -36,7 +36,8 @@ const Config = {
                 key: 'table',
                 icon: 'bars',
                 items: [
-                    {title: 'table数据展示项1', key: 'Feature1-1'},
+                    {title: 'table数据展示前端分页', key: 'Feature1-1'},
+                    {title: 'table数据展示接口分页', key: 'Feature1-1-1'},
                     {title: 'table数据展示项2', key: 'Feature1-2'},
                     {title: 'table数据搜索数据操作', key: 'Feature1-3'},
                     {title: 'table数据增加数据操作', key: 'Feature1-4'},
@@ -122,8 +123,12 @@ const Config = {
     main: {
         components: {
             'Feature1-1': {
-                title: 'table 普通列表数据展示',
+                title: 'table 普通列表数据展示 前端处理分页',
                 component: require('./components/feature/Feature1-1')
+            }, 
+            'Feature1-1-1': {
+                title: 'table 普通列表数据展示 接口请求分页',
+                component: require('./components/feature/Feature1-1-1')
             }, 
             'Feature1-2': {
                 title: 'table 具有相关操作数据展示',

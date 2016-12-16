@@ -241,6 +241,33 @@ npm Build 开始构建压缩
             data.key = data.id;
             callback(data);
         }
+* pageData (function) 接口分页数据处理
+        
+        // 接口分页处理
+        // callback 回传列表数据 第二参数接受 总数与每页数目
+        // 需要手动添加唯一id key
+        pageData: function(num, callback){
+            Reqwest({
+                url: '/api/example2',
+                data: {
+                    page:num,
+                    pageSize: 20
+                },
+
+                type: 'json',
+                success: function (data) {
+                    let list = data.data;
+                    list.forEach(function(ele) {
+                        ele.key = ele.id;
+                    });
+                    // 回调的第二个参数为数量总数 以及每页的数量
+                    callback(list, {
+                        total: 399,
+                        pageSize: 20
+                    });
+                }
+            });
+        }
 
 **table类型 展现数据**
 

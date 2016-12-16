@@ -35,12 +35,14 @@ const FeatureSet = (config) => {
                 loading: false,
 
                 updateFromShow: false,
-                updateFromItem: {}
+                updateFromItem: {},
+                
+                total: 0,
+                pageSize: 10
             }
         },
         
         componentWillMount: function(){
-
             this.setState({
                 loading: true,
                 columns: this.dealConfigColumns(config.columns)
@@ -49,12 +51,30 @@ const FeatureSet = (config) => {
 
         render: function() {
             const self = this;
+
+            let table;
+            if(config.pageData){
+                const pagination = {
+                    total: this.state.total,
+                    pageSize: this.state.pageSize,
+                    onChange: function(num){
+                        self.setState({
+                            loading: true
+                        });
+                        self.getpageData(num);
+                    }
+                }
+
+                table = <Table dataSource={this.state.resultList} columns={this.state.columns} loading={this.state.loading} pagination={pagination} bordered/>;
+            }else{
+                table = <Table dataSource={this.state.resultList} columns={this.state.columns} loading={this.state.loading} bordered/>;
+            }
             
             return  <div className={this.props.className}>
                         <RForm RType={config.RType} submit={self.handleRetrieve}/>
                         <CForm CType={config.CType} submit={self.handleCreate}/>
                         <UForm UType={config.UType} submit={self.handleUpdate} isShow={this.state.updateFromShow} updateItem={this.state.updateFromItem} hideForm={this.hideUpdateForm}/>
-                        <Table dataSource={this.state.resultList} columns={this.state.columns} loading={this.state.loading} bordered/>
+                        {table}
                     </div>
         },
         
@@ -63,7 +83,6 @@ const FeatureSet = (config) => {
             const self = this;
 
             let columns = [];
-
             lists.forEach((item) => {
                 let column = {
                     title: item.title,
@@ -135,10 +154,7 @@ const FeatureSet = (config) => {
         
         handleCreate: function(info){
             const self = this;
-            self.setState({
-                loading: true
-            });
-            
+
             config.Create(info, function(item){
                 // 初级接口的坑
                 if(!item){
@@ -251,12 +267,34 @@ const FeatureSet = (config) => {
         componentDidMount: function(){
             const self = this;
             
-            config.initData(function(list){
+            // 处理接口分页的逻辑
+            if(config.pageData){
+                self.getpageData(1);
+            }else{ // 处理 前端分页的逻辑
+                config.initData(function(list){
+                    self.setState({
+                        loading: false,
+                        resultList: list
+                    });
+                });
+            }
+        },
+
+        getpageData: function(num){
+            const self = this;
+            self.setState({
+                loading: true
+            });
+
+            config.pageData(num,function(list, info){
                 self.setState({
                     loading: false,
-                    resultList: list
+                    resultList: list,
+                    total: info.total,
+                    pageSize: info.pageSize||10,
                 });
             });
+
         }
     });
 
