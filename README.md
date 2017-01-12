@@ -20,12 +20,54 @@
 
 克隆本项目，npm install 安装依赖，npm start 开始本地调试项目 开启 http://localhost:8989/便可以看到整体 DEMO 项目
 
-![image](http://image.freefe.cc/20161201144536.png)
-
 ## Build
 npm Build 开始构建压缩
 如果 alicdn 对部分域名有访问限制，或者需要内网环境使用 在部署上线的时候需要注意下载字体自行部署
 本项目修改 index.less 的 @font-face 即可
+
+![image](http://image.freefe.cc/20161201144536.png)
+
+## 目录结构
+
+```bash
+├── /mock/           # mock的接口文件 
+├── /dist/           # 项目构建输出目录
+├── /src/            # 项目开发源码目录
+│ ├── /components/   # 项目组件
+│ │ ├── /common/     # 通用集成组件
+│ │ ├── /feature/    # 页面配置文件 （主要配置文件）
+│ │ ├── /header/     # 头部组件
+│ │ ├── /main/       # 主体组件
+│ │ └── /sider/      # 边栏组件
+│ │ 
+│ ├── /routes/       # 路由组件
+│ ├── /utils/        # 工具函数
+│ ├── router.jsx     # 路由配置
+│ ├── index.jsx      # 入口文件
+│ ├── index.less     # 样式主体文件
+│ ├── config.js      # 全局配置文件（主要配置文件）
+│ └── index.html   
+│   
+├── package.json     # 项目信息
+└── proxy.config.js  # 数据mock配置
+```
+
+## 功能列表
+- [ ] 登录页面
+- [x] table数据
+    - [x] 展现配置化实现
+    - [x] 查询配置化实现
+    - [x] 新增配置化实现
+    - [x] 更新配置化实现
+    - [x] 删除配置化实现
+- [x] 对象数据
+    - [x] 展现配置化实现
+    - [x] 更新配置化实现
+- [x] 可视化图表
+    - [x] 基于echarts的数据可视化配置实现
+- [x] 富文本编辑器
+- [x] 复制粘贴功能
+
 
 ## 整站配置文件详解
 
