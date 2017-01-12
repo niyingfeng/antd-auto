@@ -18,6 +18,7 @@
     "react-dom": "^15.1.0",
     "react-tinymce": "^0.5.1",
     "reqwest": "^2.0.5",
+    "routes": "^2.1.0",
     "src": "^1.1.2"
   },
   "devDependencies": {

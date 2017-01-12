@@ -10,6 +10,8 @@ import Header from '../components/header/Header';
 import Sider from '../components/sider/Sider';
 import Main from '../components/main/Main';
 
+import Login from '../components/login/Login';
+
 //const components = config.main.components;
 const headerInfo = {
     ...config.header,
@@ -25,7 +27,7 @@ const mainInfo = {
 
 const IndexInfo = {
     permission: config.userInfo.permission,
-    loginUrl: config.userInfo.permission
+    loginUrl: config.userInfo.loginUrl
 }
 
 const App = (props) => {
@@ -48,9 +50,7 @@ const App = (props) => {
                     </div>
         }else{
             return  <div className="nopermission">
-                        您暂无权限处理该系统工作，请先
-                        <a href={IndexInfo.loginUrl}>登录</a>
-                        或者找相关人员申请权限。
+                        <Login loginUrl={IndexInfo.loginUrl}/>
                     </div>
         }
 }

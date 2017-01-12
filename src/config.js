@@ -17,6 +17,12 @@
  *     components   Object  配置sider对应功能区域组件
  *         Feature1     Object  对应sider menu 中的功能key对 应功能组件
  *     style        Object  配置样式
+ *
+ * userInfo 登入用户信息
+ *     name 登入用户名
+ *     aver 登入用户头像
+ *     permission 是否权限
+ *     loginUrl 无权限时跳转的链接（对于一些通用登入权限系统）
  */
 
 const Config = {
@@ -181,40 +187,7 @@ const Config = {
             'Feature5-2': {
                 title: '自定义组装',
                 component: require('./components/feature/Feature5-2')
-            }, 
-
-    //         'Feature1': {
-    //             title: '这是功能区域标题1',
-    //             component: require('../feature/Feature1')
-    //         },   // 纯数据展示
-    //         'Feature2': {
-    //             title: '这是功能区域标题2',
-    //             component: require('../feature/Feature2')
-    //         },   // 添加操作
-    //         'Feature3': {
-    //             title: '这是功能区域标题3',
-    //             component: require('../feature/Feature3')
-    //         },
-    //         'Feature4': {
-    //             title: '这是功能区域标题4',
-    //             component: require('../feature/Feature4')
-    //         },
-    //         'Feature5': {
-    //             title: '这是功能区域标题5',
-    //             component: require('../feature/Feature5')
-    //         },
-    //         'Feature6': {
-    //             title: '这是功能区域标题6',
-    //             component: require('../feature/Feature6')
-    //         },
-    //         'Feature7': {
-    //             title: '这是功能区域标题7',
-    //             component: require('../feature/Feature7')
-    //         },
-    //         'Feature8': {
-    //             title: '这是功能区域标题8',
-    //             component: require('../feature/Feature2')
-    //         }
+            }
         },
         style: {} 
     },
