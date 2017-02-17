@@ -13,8 +13,8 @@ import baidubce from 'bce-sdk-js';
 let config = {
     endpoint: 'http://bj.bcebos.com',         //传入Bucket所在区域域名
     credentials: {
-        ak: 'e4a6dcc47a3b46f3a5ebf0f81d0e4928',          //您的AccessKey
-        sk: '8d26035b87e14989a4343f0e43c0ce71'           //您的SecretAccessKey
+        ak: '******',          //您的AccessKey
+        sk: '******'           //您的SecretAccessKey
     }
 };
 
