@@ -12,6 +12,9 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 const RadioGroup = Radio.Group;
 
+// 对于使用默认的时间戳
+const DefaultTime = new Date();
+
 let CFormItem = React.createClass({
     getInitialState: function() {
         return {
@@ -40,7 +43,7 @@ let CFormItem = React.createClass({
                 break;
 
             case 'date':
-                defaultValue = moment(defaultValue || new Date(), "YYYY-MM-DD hh:mm:ss");
+                defaultValue = moment(defaultValue || DefaultTime, "YYYY-MM-DD hh:mm:ss");
 
                 return <FormItem
                             label={item.label}

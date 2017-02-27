@@ -20,15 +20,20 @@ body,
 
 
 // 全局从定义样式
-.ant-table-tbody {
-    tr {
-        td {
-            img {
+// 重置antd 关于table的部分样式
+.ant-table{
+    table{
+        text-align: center;
+
+        img {
                 display: block;
                 max-height: 100px;
                 margin: 0 auto;
             }
-        }
+    }
+
+    .ant-table-thead > tr > th{
+        text-align: center;
     }
 }
 

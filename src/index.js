@@ -1,6 +1,7 @@
  /**
   * @file CMS平台主文件
   * @author niyingfeng<yingfeng.ni@gmail.com>
+  * @doc https://github.com/dvajs/dva/blob/master/README_zh-CN.md
   */
 
 import './index.html';
