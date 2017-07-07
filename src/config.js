@@ -4,8 +4,9 @@
  *
  * header 管理后台头部配置
  *     title    String  标题
- *     icon     String   标题图标
+ *     icon     String  标题图标
  *     style    Object  自定义样式
+ *     menu     Array   顶部横向菜单列表
  *
  * sider  管理后台侧栏配置
  *     menu     Array   sider列表
@@ -32,7 +33,10 @@ const Config = {
         style: {
             backgroundColor: '#F5F5F5',
             color: '#666'
-        }
+        },
+        menu: [
+            {title: '集合管理', key: 'bigset'}
+        ]
     },
 
     sider: {
@@ -128,6 +132,10 @@ const Config = {
 
     main: {
         components: {
+            'bigset': {
+                title: 'bigset 测试',
+                component: require('./components/feature/Feature1-1')
+            }, 
             'Feature1-1': {
                 title: 'table 普通列表数据展示 前端处理分页',
                 component: require('./components/feature/Feature1-1')
