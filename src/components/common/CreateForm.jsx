@@ -22,7 +22,7 @@ let CForm = React.createClass({
                 <div className="create">
                     <Button type="primary" icon="plus-circle-o" onClick={this.showModal}>添加</Button>
                     <Modal title="添加新对象" visible={this.state.visible} onOk={this.handleCreate} onCancel={this.hideModal}>
-                        <Form horizontal>
+                        <Form layout="horizontal">
                             { 
                                 CType.map(function(item){
                                     //return self.dealConfigCType(item);

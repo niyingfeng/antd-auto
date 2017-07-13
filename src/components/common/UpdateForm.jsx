@@ -26,7 +26,7 @@ let UForm = React.createClass({
         return  UType ?
                 <div className="f-update">
                     <Modal title="更新对象" visible={this.props.isShow} onOk={this.handleUpdate} onCancel={this.hideModal}>
-                        <Form horizontal>
+                        <Form layout="horizontal">
                             { 
                                 UType.map(function(item){
                                     item.defaultValue = updateItem[item.name]||'';

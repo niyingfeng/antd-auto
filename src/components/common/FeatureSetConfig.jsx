@@ -325,7 +325,7 @@ const FeatureSet = (config) => {
             const operate = config.operate || [];
 
             return  <div className={this.props.className}> 
-                        <Form horizontal className='p-relative'>
+                        <Form layout="horizontal" className='p-relative'>
                             {
                                 this.state.loading?
                                     <div className="formLayout">
