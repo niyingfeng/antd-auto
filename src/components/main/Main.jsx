@@ -4,15 +4,15 @@ import { Link } from 'dva/router'
 
 const Main = (props) => {
     
-    let Feature = props.feature;
+    let Page = props.page;
 
-    return  <div key={props.featureId} className="mainer">
+    return  <div key={props.pageId} className="mainer">
                 {
                     props.title ?
                     <h3 className="title">{props.title}</h3>:
                     ''
                 }
-                <Feature params={props.params || ''}  className="item" />
+                <Page params={props.params || ''}  className="item" />
             </div>
 }
 

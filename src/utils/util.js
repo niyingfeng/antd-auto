@@ -51,5 +51,46 @@ export default {
         }
 
         return pObj;
+    },
+
+    uploadFiles: function(url, key, file, opt){
+        //return false;
+        if(!window.XMLHttpRequestUpload || !window.File || !window.FileList || !window.Blob){
+            return false;
+        }
+        opt = opt || {};
+        opt.scope = opt.scope || window;
+        
+        // 发送前验证， 比如什么大小啊什么的
+        if(opt.check){
+            if(opt.check.call(opt.scope, file) === false){
+                return true;
+            }
+        }
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', url);
+        
+        xhr.onload = function() {
+            opt.onload && opt.onload.call(opt.scope, this);
+        };
+        xhr.onerror = function() {
+            opt.onerror && opt.onerror.call(opt.scope, this);
+        };
+        xhr.upload.onprogress = function(e) {
+            opt.onprogress && opt.onprogress.call(opt.scope, e);
+        };
+        xhr.upload.onloadstart = function(e) {
+            opt.onstart && opt.onstart.call(opt.scope, e);
+        };
+
+        // prepare FormData
+        var formData = new FormData();
+        formData.append(key, file);
+        for(var name in (opt.param || {})){
+            formData.append(name, opt.param[name]);
+        }
+        xhr.send(formData);
+        return true;
     }
 };

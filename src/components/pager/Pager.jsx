@@ -11,13 +11,13 @@ import { Link } from 'dva/router';
 import Immutable from 'immutable';
 import Reqwest from 'reqwest';
 
-import CFormItem from './CreateFormItem';
-import CTextItem from './CreateTextItem';
+import CFormItem from './comp/CreateFormItem';
+import CTextItem from './comp/CreateTextItem';
 
 // 搜索查询栏form 创建新item-form 更新form 
-import UForm from './UpdateForm';
-import CForm from './CreateForm';
-import RForm from './RetrieveForm';
+import UForm from './comp/UpdateForm';
+import CForm from './comp/CreateForm';
+import RForm from './comp/RetrieveForm';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -25,7 +25,7 @@ const RadioGroup = Radio.Group;
 
 
 // 依赖 config 主题生成react 组件函数
-const FeatureSet = (config) => {
+const Pager = (config) => {
     
     let tableFeature = React.createClass({
         getInitialState: function(){
@@ -325,7 +325,7 @@ const FeatureSet = (config) => {
             const operate = config.operate || [];
 
             return  <div className={this.props.className}> 
-                        <Form layout="horizontal" className='p-relative'>
+                        <Form horizontal className='p-relative'>
                             {
                                 this.state.loading?
                                     <div className="formLayout">
@@ -456,4 +456,4 @@ const FeatureSet = (config) => {
 }
 
 
-export default FeatureSet;
+export default Pager;

@@ -5,49 +5,16 @@
 @import "~antd/lib/style/core/index.less";
 @import "~antd/lib/style/components.less";
 
+// 组件相关样式
 @import "components/header/Header.less";
 @import "components/main/Main.less";
 @import "components/sider/Sider.less";
-@import "components/common/Common.less";
+@import "components/pager/Pager.less";
+
+@import "components/table/Tabler.less";
+
+// 页面总样式
+@import "page/page.less";
 
 @import "routes/IndexPage.less";
-
-html,
-body,
-#root {
-    height: 100%;
-}
-
-
-// 全局从定义样式
-// 重置antd 关于table的部分样式
-.ant-table{
-    table{
-        text-align: center;
-
-        img {
-                display: block;
-                max-height: 100px;
-                margin: 0 auto;
-            }
-    }
-
-    .ant-table-thead > tr > th{
-        text-align: center;
-    }
-}
-
-.ant-form-inline .ant-form-item {
-    margin-right: 30px;
-}
-
-.formLayout {
-    position: absolute;
-    z-index: 999;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    text-align: center;
-    background-color: rgba(255, 255, 255, .75);
-}
+@import "routes/PlatFixed.less";

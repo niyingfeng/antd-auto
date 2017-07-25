@@ -7,7 +7,7 @@ export default function({ history }) {
     return (
         <Router history={history}>
             <Route path="/" component={IndexPage} />
-            <Route path="/:FeatureId(/:params)" component={IndexPage} />
+            <Route path="/:PageId(/:params)" component={IndexPage} />
         </Router>
     );
 };

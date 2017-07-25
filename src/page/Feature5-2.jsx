@@ -9,11 +9,12 @@ import { Form, Input, Button } from 'antd';
 
 const FormItem = Form.Item;
 
-let Feature = React.createClass({getInitialState: function(){
-    return {
-            imgUrl: '',
-            valueString: ''
-        }
+let Feature = React.createClass({
+    getInitialState: function(){
+        return {
+                imgUrl: '',
+                valueString: ''
+            }
     },
     render: function() {
 

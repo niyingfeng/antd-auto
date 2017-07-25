@@ -1,15 +1,13 @@
 import React from 'react';
-import { Affix, Menu, Icon } from 'antd';
-import { Link } from 'dva/router';
+import {
+    Icon
+} from 'antd';
+import {
+    Link
+} from 'dva/router';
 
-const HeadMenuItemCreat  = (items) => {
-        return items.map(function(item){
-            return  <Link key={item.key} to={'/'+item.key}>{item.title}</Link>
-        });
-};
-
-function Header(props){
-    return  <div style={props.style} className="header">
+const Header = (props) => {
+    return <div style={props.style} className="header">
                 <h2>
                     <Icon className="icon" type={props.icon} />
                     {props.title}
@@ -18,7 +16,9 @@ function Header(props){
                     props.menu ?
                     <div className="head-menu">
                         { 
-                            HeadMenuItemCreat(props.menu)
+                            props.menu.map(function(item){
+                                return  <Link key={item.key} to={'/'+item.key}>{item.title}</Link>
+                            })
                         }
                     </div>:
                     ""

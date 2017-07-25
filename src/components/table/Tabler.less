@@ -1,0 +1,33 @@
+// header 部分
+.tabler {
+    .editable-cell {
+        position: relative;
+
+        &:hover .editable-cell-icon {
+            display: inline-block;
+        }
+    }
+    .editable-cell-text-wrapper {
+        padding: 5px 24px 5px 5px;
+    }
+    .editable-cell-input-wrapper, .editable-cell-text-wrapper, .editable-cell-select-wrapper {
+        padding-right: 24px;
+    }
+    .editable-cell-icon, .editable-cell-icon-check {
+        position: absolute;
+        right: 0;
+        width: 20px;
+        cursor: pointer;
+
+        &:hover {
+            color: #0e77ca;
+        }
+    }
+    .editable-cell-icon {
+        line-height: 18px;
+        display: none;
+    }
+    .editable-cell-icon-check {
+        line-height: 28px;
+    }
+}

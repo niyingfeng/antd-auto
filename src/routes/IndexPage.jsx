@@ -4,7 +4,8 @@ import ReactDom from 'react-dom';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
 
-import config from '../config';
+// 平台配置总文件
+import platConfig from '../config/platConfig';
 
 import Header from '../components/header/Header';
 import Sider from '../components/sider/Sider';
@@ -12,41 +13,41 @@ import Main from '../components/main/Main';
 
 import Login from '../components/login/Login';
 
-//const components = config.main.components;
+//const components = platConfig.main.components;
 const headerInfo = {
-    ...config.header,
-    name: config.userInfo.name,
-    aver: config.userInfo.aver
+    ...platConfig.header,
+    name: platConfig.userInfo.name,
+    aver: platConfig.userInfo.aver
 }
 
-const siderInfo = { ...config.sider };
+const siderInfo = { ...platConfig.sider };
 
 const mainInfo = {
-    style: config.sider.style
+    style: platConfig.sider.style
 }
 
 const IndexInfo = {
-    permission: config.userInfo.permission,
-    loginUrl: config.userInfo.loginUrl
+    permission: platConfig.userInfo.permission,
+    loginUrl: platConfig.userInfo.loginUrl
 }
 
 const App = (props) => {
 
-        let featureId = props.params.FeatureId || config.sider.selectedKey;
+        let pageId = props.params.PageId || platConfig.sider.selectedKey;
 
-        let featureInfo = {
-            featureId: featureId,
+        let pageInfo = {
+            pageId: pageId,
             params: props.params.params,
 
-            feature: config.main.components[featureId].component,
-            title: config.main.components[featureId].title,
+            page: platConfig.main.components[pageId].component,
+            title: platConfig.main.components[pageId].title,
         }
         
         if(IndexInfo.permission){
             return  <div>
                         <Header {...headerInfo}/>
-                        <Sider {...siderInfo} selectedKey={featureId}/>
-                        <Main {...mainInfo} {...featureInfo}/>
+                        <Sider {...siderInfo} selectedKey={pageId}/>
+                        <Main {...mainInfo} {...pageInfo}/>
                     </div>
         }else{
             return  <div className="nopermission">
