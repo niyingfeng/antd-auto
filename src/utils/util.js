@@ -7,7 +7,7 @@
 // 处理自定义链接参数数据
 
 export default { 
-    DateFormat: function (date, fmt) {
+    DateFormat(date, fmt) {
         if (typeof date === 'string') {
             date = new Date(date);
         }
@@ -18,7 +18,7 @@ export default {
             'D+': date.getDate(), // 日
             'd+': date.getDate(), // 日
 
-            'h+': date.getHours() % 12 == 0 ? 12 : date.getHours() % 12, // 小时 12小时制
+            'h+': date.getHours() % 12 === 0 ? 12 : date.getHours() % 12, // 小时 12小时制
             'H+': date.getHours(), // 小时
 
             'm+': date.getMinutes(), // 分
@@ -41,8 +41,8 @@ export default {
         }
         return fmt;
     },
-    
-    ParamsFixed: function (str) {
+
+    ParamsFixed(str) {
         let pObj = {};
         let pArr = str.split('&');
         for (let i = pArr.length - 1; i >= 0 && pArr[i]; i--) {
@@ -53,7 +53,7 @@ export default {
         return pObj;
     },
 
-    uploadFiles: function(url, key, file, opt){
+    uploadFiles(url, key, file, opt) {
         //return false;
         if(!window.XMLHttpRequestUpload || !window.File || !window.FileList || !window.Blob){
             return false;
@@ -68,7 +68,7 @@ export default {
             }
         }
         
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         xhr.open('POST', url);
         
         xhr.onload = function() {
@@ -85,12 +85,12 @@ export default {
         };
 
         // prepare FormData
-        var formData = new FormData();
+        let formData = new FormData();
         formData.append(key, file);
-        for(var name in (opt.param || {})){
+        for (let name in (opt.param || {})) {
             formData.append(name, opt.param[name]);
         }
         xhr.send(formData);
         return true;
     }
-};
+}

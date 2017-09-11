@@ -1,7 +1,6 @@
 /**
  * @file CMS平台整体api文件配置
- * @author niyingfeng<yingfeng.ni@gmail.com> 
- *
+ * @author niyingfeng<yingfeng.ni@gmail.com>
  */
 
 const isLocal = location.hostname === 'localhost';

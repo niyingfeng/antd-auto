@@ -1,3 +1,7 @@
+ /**
+  * @file CMS平台
+  * @author niyingfeng<yingfeng.ni@gmail.com>
+  */
 'use strict';
 
 const mock = {};

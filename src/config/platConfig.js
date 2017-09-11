@@ -1,6 +1,6 @@
 /**
  * @file CMS平台整体配置文件
- * @author niyingfeng<yingfeng.ni@gmail.com> 
+ * @author niyingfeng<yingfeng.ni@gmail.com>
  *
  * header 管理后台头部配置
  *     title    String  标题
@@ -24,6 +24,7 @@
  *     permission 是否权限
  *     loginUrl 无权限时跳转的链接（对于一些通用登入权限系统）
  */
+/* eslint-disable */
 
 const Config = {
     header: {
