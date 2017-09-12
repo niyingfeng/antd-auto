@@ -2,20 +2,21 @@
  * @file CMS平台整体配置文件
  * @author niyingfeng<yingfeng.ni@gmail.com>
  *
- * header 管理后台头部配置
+ * header 管理后台头部配置 （../components/header）
  *     title    String  标题
- *     icon     String   标题图标
+ *     icon     String  标题图标
  *     style    Object  自定义样式
+ *     menu     Array   header顶部的sider列表 仅支持单级
  *
- * sider  管理后台侧栏配置
- *     menu     Array   sider列表
+ * sider  管理后台侧栏配置 (../components/sider)
+ *     menu     Array   左侧栏sider列表 支持多层级
  *     openKeys Array   默认展开的sider区
  *     selectedKey  String  默认打开的功能区
  *     style    Object  自定义样式
  *
  * main  功能区域配置
  *     components   Object  配置sider对应功能区域组件
- *         Feature1     Object  对应sider menu 中的功能key对 应功能组件
+ *         Feature1     Object  对应sider与headerd的 menu 中的功能key对 应功能组件
  *     style        Object  配置样式
  *
  * userInfo 登入用户信息
@@ -24,7 +25,6 @@
  *     permission 是否权限
  *     loginUrl 无权限时跳转的链接（对于一些通用登入权限系统）
  */
-/* eslint-disable */
 
 const Config = {
     header: {
@@ -36,21 +36,12 @@ const Config = {
         },
 
         menu: [{
-            title: '集合管理',
-            key: 'bigset'
+            title: '顶部菜单栏示例1',
+            key: 'defallt'
         }, {
-            title: '分级配置',
-            key: 'category'
-        }, {
-            title: 'Meta配置',
-            key: 'meta'
-        }, {
-            title: '权限配置',
-            key: 'user'
-        }, {
-            title: '操作日志',
-            key: 'log'
-        }, ]
+            title: '顶部菜单栏示例2',
+            key: 'defallt2'
+        }]
     },
 
     sider: {
@@ -59,13 +50,10 @@ const Config = {
                 key: 'table',
                 icon: 'bars',
                 items: [{
-                    title: 'table数据展示前端分页',
+                    title: 'table接口分页数据展现',
                     key: 'Feature1-1'
                 }, {
-                    title: 'table数据展示接口分页',
-                    key: 'Feature1-1-1'
-                }, {
-                    title: 'table数据展示项2',
+                    title: 'table块级数据分页展示',
                     key: 'Feature1-2'
                 }, {
                     title: 'table数据搜索数据操作',
@@ -135,7 +123,7 @@ const Config = {
             //         {title: '选项1', key: 'Feature1'},
             //         {title: '选项2', key: 'Feature2'},
             //         {title: '选项3', key: 'Feature3'},
-            //         {   
+            //         {
             //             title: '导航3',
             //             key: 'subTitle3',
             //             icon: ',
@@ -160,14 +148,17 @@ const Config = {
 
         ],
         openKeys: [],
-        selectedKey: 'Defallt',
+        selectedKey: 'defallt',
         style: {}
     },
 
     main: {
         components: {
-            'Defallt': {
+            'defallt': {
                 component: require('../page/default')
+            },
+            'defallt2': {
+                component: require('../page/default2')
             },
 
             'bigset': {
@@ -193,40 +184,36 @@ const Config = {
             'log': {
                 title: '用户权限管理',
                 component: require('../page/log')
-            }
+            },
 
-            // 'Feature1-1': {
-            //     title: 'table 普通列表数据展示 前端处理分页',
-            //     component: require('../page/Feature1-1')
-            // }, 
-            // 'Feature1-1-1': {
-            //     title: 'table 普通列表数据展示 接口请求分页',
-            //     component: require('../page/Feature1-1-1')
-            // }, 
-            // 'Feature1-2': {
-            //     title: 'table 具有相关操作数据展示',
-            //     component: require('../page/Feature1-2')
-            // }, 
-            // 'Feature1-3': {
-            //     title: 'table 数据搜索数据操作',
-            //     component: require('../page/Feature1-3')
-            // }, 
-            // 'Feature1-4': {
-            //     title: 'table 数据增加数据操作',
-            //     component: require('../page/Feature1-4')
-            // },
-            // 'Feature1-5': {
-            //     title: 'table 数据更新数据操作',
-            //     component: require('../page/Feature1-5')
-            // }, 
-            // 'Feature1-6': {
-            //     title: 'table 数据删除数据操作',
-            //     component: require('../page/Feature1-6')
-            // }, 
+            'Feature1-1': {
+                title: 'table 数据接口分页请求展示',
+                component: require('../page/Feature1-1')
+            },
+            'Feature1-2': {
+                title: 'table 具有相关操作数据展示',
+                component: require('../page/Feature1-2')
+            },
+            'Feature1-3': {
+                title: 'table 数据搜索数据操作',
+                component: require('../page/Feature1-3')
+            },
+            'Feature1-4': {
+                title: 'table 数据增加数据操作',
+                component: require('../page/Feature1-4')
+            },
+            'Feature1-5': {
+                title: 'table 数据更新数据操作',
+                component: require('../page/Feature1-5')
+            },
+            'Feature1-6': {
+                title: 'table 数据删除数据操作',
+                component: require('../page/Feature1-6')
+            },
             // 'Feature2-1': {
             //     title: 'simple对象 数据展示',
             //     component: require('../page/Feature2-1')
-            // }, 
+            // },
             // 'Feature2-2': {
             //     title: 'simple对象数据修改操作',
             //     component: require('../page/Feature2-2')
@@ -238,11 +225,11 @@ const Config = {
             // 'Feature3-2': {
             //     title: '数据可视化 数据展示',
             //     component: require('../page/Feature3-2')
-            // }, 
+            // },
             // 'Feature3-3': {
             //     title: '数据可视化 数据展示',
             //     component: require('../page/Feature3-3')
-            // }, 
+            // },
             // 'Feature4-1': {
             //     title: '综合数据展示',
             //     component: require('../page/Feature4-1')
@@ -250,7 +237,7 @@ const Config = {
             // 'Feature5-1': {
             //     title: '富文本编辑区域',
             //     component: require('../page/Feature5-1')
-            // }, 
+            // },
             // 'Feature5-2': {
             //     title: '自定义组装',
             //     component: require('../page/Feature5-2')
@@ -260,8 +247,8 @@ const Config = {
     },
 
     userInfo: {
-        name: BaiduInfo.name || '游客',
-        aver: BaiduInfo.aver || 'http://himg.bdimg.com/sys/portrait/item/113e68695f79696e6766656e67525e.jpg',
+        name: BaiduInfo.name,
+        aver: BaiduInfo.aver,
         permission: BaiduInfo.permission,
         loginUrl: BaiduInfo.loginUrl
     }

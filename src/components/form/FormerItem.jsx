@@ -1,4 +1,7 @@
 /**
+ * @file CMS平台Fomer item组件
+ * @author niyingfeng<yingfeng.ni@gmail.com>
+ *
  * 表单独立项 用于对于表单字段的创建
  * 接受props
  * {
@@ -8,41 +11,32 @@
  *          type: string（必需）生成表单元素的类型 包含 string date select cascader radio checkbox switch
  *          label: string（必需）label名称
  *          name: string（必需）表单字段name
- *          
+ *
  *          rules: （非必需）输入规则
  *          placeholder: （非必需）输入提示文案
  *          defaultValue: （非必需）默认显示值
  *
  *          options: array 选项列表 type为 select 和 radio 时必须参数
- *          
+ *
  *      }
  *      formItemLayout: （非必需）FormItem的布局
  * }
  */
 
 import React from 'react';
-import moment from 'moment';
 
 import {
     Form,
     Select,
     Input,
-    Button,
-    Icon,
     DatePicker,
-    TimePicker,
     Radio,
     Switch,
     Cascader,
     Checkbox
 } from 'antd';
-import {
-    Upload,
-    Modal,
-    message
-} from 'antd';
 
-//import BDUploader from './BDUploader';
+import moment from 'moment';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -52,6 +46,7 @@ const RadioGroup = Radio.Group;
 const DefaultTime = new Date();
 
 const FormerItem = (props) => {
+
     let {
         getFieldDecorator,
         formItemLayout = {},
@@ -115,7 +110,6 @@ const FormerItem = (props) => {
                         {getFieldDecorator(item.name, { initialValue: defaultValue })(
                             <Cascader options={item.options} style={{ width: item.width }} changeOnSelect/>
                         )}
-                        
                     </FormItem>
             break;
 

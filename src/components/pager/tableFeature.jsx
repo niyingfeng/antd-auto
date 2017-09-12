@@ -3,7 +3,8 @@ import React from 'react';
 import ReactEcharts from 'echarts-for-react';
 
 import { Table, Form, Select, Input, Row, Col, Button, Icon } from 'antd';
-import { message, Spin } from 'antd';
+import { DatePicker, TimePicker, Radio, Switch} from 'antd';
+import { Upload, Modal, message, Spin} from 'antd';
 
 import { Link } from 'dva/router';
 
@@ -19,10 +20,11 @@ import RForm from './comp/RetrieveForm';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
+const RadioGroup = Radio.Group;
 
 
 // 依赖 config 主题生成react 组件函数
-const Pager = (config) => {
+const ableFeature = (config) => {
     
     let tableFeature = React.createClass({
         getInitialState: function(){
@@ -294,162 +296,6 @@ const Pager = (config) => {
 
         }
     });
-
-    let simpleFeature = React.createClass({
-        getInitialState: function(){
-            return {
-                item:{},
-                loading: false,
-    
-                updateFromShow: false,
-                updateFromItem: {}
-            }
-        },
-        
-        componentWillMount: function(){
-        },
-
-        render: function() {
-            const self = this;
-            const itemInfo = this.state.item;
-
-            const { getFieldDecorator } = this.props.form;
-            const formItemLayout = {
-                labelCol: { span: 3 },
-                wrapperCol: { span: 18 },
-            };
-
-            const operate = config.operate || [];
-
-            return  <div className={this.props.className}> 
-                        <Form horizontal className='p-relative'>
-                            {
-                                this.state.loading?
-                                    <div className="formLayout">
-                                        <Spin size="large" style={{"marginTop":"50px"}}/>
-                                    </div>:
-                                    ''
-                            }
-                            { 
-                                config.columns?
-                                    config.columns.map(function(item){
-                                        item.value = itemInfo[item.dataIndex]||'';
-                                        return <CTextItem key={item.dataIndex} formItemLayout={formItemLayout} item={item}/>
-                                    }):
-                                    ''
-                            }
-                            { 
-                                config.UType?
-                                    config.UType.map(function(item){
-                                        item.defaultValue = itemInfo[item.name]||'';
-                                        return <CFormItem key={item.name} getFieldDecorator={getFieldDecorator} formItemLayout={formItemLayout} item={item}/>
-                                    }):
-                                    ''
-                            }
-                        </Form>
-                        { 
-                            operate.map(function(btn){
-                                return <Button key={btn.text} type="primary" size="large" onClick={self.operateCallbacks.bind(self, btn)} style={btn.style}>{btn.text}</Button>
-                            })
-                        }
-                    </div>
-        },
-
-        componentDidMount: function(){
-            const self = this;
-            self.setState({
-                loading: true
-            });
-            
-            config.initData(function(item){
-                self.setState({
-                    item: item,
-                    loading: false
-                });
-            });
-        },
-
-        operateCallbacks: function(btn){
-            const self = this;
-
-            let itemI = Immutable.fromJS(this.props.form.getFieldsValue());
-
-            if(btn.type === 'update'){
-                const self = this;
-
-                config.Update(itemI.toJS(), function(item){
-                    message.success('更新成功');
-                    self.setState({
-                        item: item
-                    });
-                });
-               
-            }else if(btn.callback){
-                btn.callback(itemI.toJS());
-            }
-        }
-    });
-    simpleFeature = Form.create()(simpleFeature);
-    
-
-    let graphFeature = React.createClass({
-        getInitialState: function(){
-            return {
-                option: false
-            }
-        },
-        
-        componentWillMount: function(){
-        },
-
-        render: function() {
-            const self = this;
-            const itemInfo = this.state.item;
-
-            const operate = config.operate || [];
-
-            return  <div className={this.props.className}>
-                        {this.state.option?
-                        <ReactEcharts
-                            option={this.state.option} 
-                            style={config.EchartStyle} 
-                            className='react_for_echarts' />:
-                        ''}
-                    </div>
-        },
-
-        componentDidMount: function(){
-            const self = this;
-
-            config.initData(function(option){
-                self.setState({
-                    option: option
-                });
-            });
-        }
-    });
-
-    switch (config.type){
-        case 'tableList':
-            return tableFeature;
-            break;
-
-        case 'graphList':
-            return graphFeature;
-            break;
-            
-        case 'simpleObject':
-            return simpleFeature;
-            break;
-            
-        case 'complexObject':
-            return complexFeature;
-            break;
-
-        default:
-            return tableFeature;
-            break;
-    }
 }
 
 

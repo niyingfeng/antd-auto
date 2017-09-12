@@ -2,8 +2,7 @@
 import React from 'react';
 import Reqwest from 'reqwest';
 
-import CopyClipboard from '../common/CopyClipboard';
-import FeatureSetConfig from '../common/FeatureSetConfig';
+import Pager from '../components/pager/Pager';
 
 // 增加(Create)、重新取得数据(Retrieve)、更新(Update)和删除(Delete)
 const table_conf = {
@@ -75,14 +74,12 @@ const table_conf = {
                 callback: function(item){
                     console.log(item)
                 }
-            },{
-                render: (text, item) => (<CopyClipboard title='复制链接' type='link' data={item.link} />)
             }], 
         }
     ]
 
 };
 
-const Feature = FeatureSetConfig(table_conf);
+const Feature = Pager(table_conf);
 
 export default Feature;

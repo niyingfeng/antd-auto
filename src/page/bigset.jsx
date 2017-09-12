@@ -1,10 +1,8 @@
 // 含有可操作 table 栏的数据展示
 import React from 'react';
+import { Component } from 'react';
 
 import Reqwest from 'reqwest';
-import apiConfig from '../config/apiConfig';
-
-import util from '../utils/util';
 
 import {
     Table,
@@ -17,16 +15,30 @@ import {
     Upload
 } from 'antd';
 const FormItem = Form.Item;
+const confirm = Modal.confirm;
 
-let Feature = React.createClass({
-    getInitialState: function() {
-        return {
+
+import apiConfig from '../config/apiConfig';
+import util from '../utils/util';
+
+class BigSet extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
             list: [],
             updateIsShow: false,
+            deleteIsShow: false,
             selectedSetname: ''
-        }
-    },
-    render: function() {
+        };
+
+        this.handleUpdate = this.handleUpdate.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
+
+        this.addSet = this.addSet.bind(this);
+    }
+
+    render() {
         let columns = [{
             title: 'KEY',
             dataIndex: 'key',
@@ -88,8 +100,9 @@ let Feature = React.createClass({
                         </Form>
                     </Modal>
                 </div>
-    },
-    componentDidMount: function() {
+    }
+
+    componentDidMount() {
 
         let that = this;
         // 接口调用数据形式
@@ -106,11 +119,13 @@ let Feature = React.createClass({
                 });
             }
         });
-    },
-    saveFormRef: function(form) {
+    }
+
+    saveFormRef(form) {
         this.form = form;
-    },
-    handleUpdate: function() {
+    }
+
+    handleUpdate() {
         let name = this.refs.name.refs.input.value;
         let file = this.refs.file.refs.input.files;
 
@@ -128,42 +143,54 @@ let Feature = React.createClass({
                 key: name
             }
         });
-    },
-    handleCancel: function() {
+        message.info('创建成功');
+        setTimeout(() => {
+            this.setState({
+                updateIsShow: false
+            });
+        }, 5000);
+        window.location.reload();
+    }
+    handleCancel() {
         this.setState({
             updateIsShow: false
         });
-    },
+    }
 
-    addSet: function() {
+    addSet() {
         this.setState({
             selectedSetname: '',
             updateIsShow: true,
         });
-    },
-    changeSet: function(key) {
-        console.log(key)
+    }
+
+    changeSet(key) {
+        console.log(key);
         this.setState({
             selectedSetname: key,
             updateIsShow: true,
         });
-    },
-    deleteSet: function(key) {
-        Reqwest({
-            url: apiConfig.delbigset,
-            data: {
-                app: 'flyflow',
-                key: key
-            },
-
-            type: 'json',
-            success: function(data) {
-                // 模拟请求删除成功的回调
-            }
-        });
     }
-});
 
-Feature = Form.create()(Feature)
+    deleteSet(key) {
+        confirm({
+            title: '确定删除该集合?',
+            onOk() {
+                Reqwest({
+                    url: apiConfig.delbigset,
+                    data: {
+                        app: 'flyflow',
+                        key: key
+                    },
+                    type: 'json',
+                    success: function(data) {
+                        // 模拟请求删除成功的回调
+                        window.location.reload();
+                    }
+                });
+            }
+        })
+    }
+}
 
-export default Feature;
+export default Form.create()(BigSet);

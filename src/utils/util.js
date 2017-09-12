@@ -6,7 +6,7 @@
 // 处理时间格式数据
 // 处理自定义链接参数数据
 
-export default { 
+export default {
     DateFormat(date, fmt) {
         if (typeof date === 'string') {
             date = new Date(date);
@@ -60,17 +60,17 @@ export default {
         }
         opt = opt || {};
         opt.scope = opt.scope || window;
-        
+
         // 发送前验证， 比如什么大小啊什么的
         if(opt.check){
             if(opt.check.call(opt.scope, file) === false){
                 return true;
             }
         }
-        
+
         let xhr = new XMLHttpRequest();
         xhr.open('POST', url);
-        
+
         xhr.onload = function() {
             opt.onload && opt.onload.call(opt.scope, this);
         };

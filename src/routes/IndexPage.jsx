@@ -42,10 +42,10 @@ const App = (props) => {
             page: platConfig.main.components[pageId].component,
             title: platConfig.main.components[pageId].title,
         }
-        
+
         if(IndexInfo.permission){
             return  <div>
-                        <Header {...headerInfo}/>
+                        <Header {...headerInfo} selectedKey={pageId}/>
                         <Sider {...siderInfo} selectedKey={pageId}/>
                         <Main {...mainInfo} {...pageInfo}/>
                     </div>

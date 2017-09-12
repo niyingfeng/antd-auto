@@ -1,10 +1,8 @@
 // 含有可操作 table 栏的数据展示
 import React from 'react';
-
-import FeatureSetConfig from '../common/FeatureSetConfig';
-
-import Immutable from 'immutable';
 import Reqwest from 'reqwest';
+
+import Pager from '../components/pager/Pager';
 
 const conf = {
     
@@ -147,6 +145,6 @@ const conf = {
 
 };
 
-const Feature = FeatureSetConfig(conf);
+const Feature = Pager(conf);
 
 export default Feature;

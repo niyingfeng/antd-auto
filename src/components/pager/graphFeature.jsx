@@ -3,7 +3,8 @@ import React from 'react';
 import ReactEcharts from 'echarts-for-react';
 
 import { Table, Form, Select, Input, Row, Col, Button, Icon } from 'antd';
-import { message, Spin } from 'antd';
+import { DatePicker, TimePicker, Radio, Switch} from 'antd';
+import { Upload, Modal, message, Spin} from 'antd';
 
 import { Link } from 'dva/router';
 
@@ -19,6 +20,7 @@ import RForm from './comp/RetrieveForm';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
+const RadioGroup = Radio.Group;
 
 
 // 依赖 config 主题生成react 组件函数
