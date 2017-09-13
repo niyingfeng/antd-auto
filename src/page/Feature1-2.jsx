@@ -80,6 +80,8 @@ const table_conf = {
 
 };
 
-const Feature = Pager(table_conf);
+const Feature = () => {
+    return <Pager className="item" {...table_conf}/>;
+}
 
 export default Feature;

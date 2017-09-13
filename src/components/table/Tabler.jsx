@@ -131,8 +131,6 @@ class Tabler extends React.Component {
                                             </span>
                                         );
                                     }
-                                    
-                                        
                                 })
                             }
                             </span>

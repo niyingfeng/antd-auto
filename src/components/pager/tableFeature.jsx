@@ -1,302 +1,288 @@
 // 纯数据展现情况列表
-import React from 'react';
-import ReactEcharts from 'echarts-for-react';
+import React, { Component } from 'react';
 
-import { Table, Form, Select, Input, Row, Col, Button, Icon } from 'antd';
-import { DatePicker, TimePicker, Radio, Switch} from 'antd';
-import { Upload, Modal, message, Spin} from 'antd';
+import { Table, Input, message } from 'antd';
 
-import { Link } from 'dva/router';
-
-import Immutable from 'immutable';
-
-import CFormItem from './comp/CreateFormItem';
-import CTextItem from './comp/CreateTextItem';
-
-// 搜索查询栏form 创建新item-form 更新form 
+// 搜索查询栏form 创建新item-form 更新form
 import UForm from './comp/UpdateForm';
 import CForm from './comp/CreateForm';
 import RForm from './comp/RetrieveForm';
 
-const FormItem = Form.Item;
-const Option = Select.Option;
-const RadioGroup = Radio.Group;
+const renderFunc = (type) => {
+    switch (type) {
+        case 'link':
+            return (text) => (
+                        <span>
+                            <a href={text}>{text}</a>
+                        </span>
+                        );
+            break;
 
+        case 'image':
+            return (url) => (
+                        <span>
+                            <img src={url} />
+                        </span>
+                        );
+            break;
 
-// 依赖 config 主题生成react 组件函数
-const ableFeature = (config) => {
-    
-    let tableFeature = React.createClass({
-        getInitialState: function(){
-            return {
-                columns: [],
-                resultList: [],
-                loading: false,
+        default:
+            return;
+    }
+}
 
-                updateFromShow: false,
-                updateFromItem: {},
-                
-                total: 0,
-                pageSize: 10
-            }
-        },
-        
-        componentWillMount: function(){
-            this.setState({
-                loading: true,
-                columns: this.dealConfigColumns(config.columns)
-            });
-        },
+// 依赖 props 生成react 组件函数
+class TableFeature extends Component {
+    constructor(props) {
+        super(props);
+        console.log(props);
+        this.state = {
+            columns: this.handleColumns(props.columns),
+            resultList: [],
+            loading: true,
 
-        render: function() {
-            const self = this;
+            updateFromShow: false,
+            updateFromItem: {},
 
-            let table;
-            if(config.pageData){
-                const pagination = {
-                    total: this.state.total,
-                    pageSize: this.state.pageSize,
-                    onChange: function(num){
-                        self.setState({
-                            loading: true
-                        });
-                        self.getpageData(num);
-                    }
-                }
+            total: 0,
+            pageSize: 10
+        }
+    }
 
-                table = <Table dataSource={this.state.resultList} columns={this.state.columns} loading={this.state.loading} pagination={pagination} bordered/>;
-            }else{
-                table = <Table dataSource={this.state.resultList} columns={this.state.columns} loading={this.state.loading} bordered/>;
-            }
-            
-            return  <div className={this.props.className}>
-                        <RForm RType={config.RType} submit={self.handleRetrieve}/>
-                        <CForm CType={config.CType} submit={self.handleCreate}/>
-                        <UForm UType={config.UType} submit={self.handleUpdate} isShow={this.state.updateFromShow} updateItem={this.state.updateFromItem} hideForm={this.hideUpdateForm}/>
-                        {table}
-                    </div>
-        },
-        
-        // 预处理配置显示中的 colums 数据 用于anted的table配置
-        dealConfigColumns: function(lists){
-            const self = this;
-
-            let columns = [];
-            lists.forEach((item) => {
-                let column = {
-                    title: item.title,
-                    dataIndex: item.dataIndex,
-                    key: item.dataIndex,
-                    width: item.width
-                }
-                
-                if( item.type === 'operate' ){
-                    // 兼容单一形式与数组形式
-                    let btns = Array.isArray(item.btns)?item.btns:[item.btns];
-                    
-                    // 处理表单 操作 栏目以及回调函数
-                    column.render = item.render || function(txt, record){
-                        return <span>
-                                {
-                                    btns.map(function(btn,i) {
-                                        if( btn.text ){
-                                            return  (
-                                                <span key={i}>
-                                                    <a href="javascript:void 0;" onClick={self.operateCallbacks.bind(self, record, btn)}>{btn.text}</a>
-                                                    {i!==btns.length-1?<span className="ant-divider"></span>:''}
-                                                </span>
-                                            );
-                                        }else if( btn.render ){
-                                            return (
-                                                <span key={i}>
-                                                    {btn.render(txt, record)}
-                                                    {i!==btns.length-1?<span className="ant-divider"></span>:''}
-                                                </span>
-                                            );
-                                        }
-                                        
-                                            
-                                    })
-                                }
-                                </span>
-                    };
-                }else if( !item.dataIndex ){
-                    item.dataIndex = 'NORMAL_INDEX';
-                    column.render = item.render || self.renderFunc[item.type];
-                } else{
-                    column.render = item.render || self.renderFunc[item.type] || ((text) => (<span>{text}</span>));
-                }
-
-                if(item.sort){
-                    column.sorter = item.sorter || ((a, b) => a[item.dataIndex] - b[item.dataIndex]);
-                }
-                columns.push(column);
-                
-            });
-            
-            return columns;
-            
-        },
-        
-        // columns 类型对应的通用痛render
-        renderFunc: {
-            link: (text) => (
-                    <span>
-                        <a href={text}>{text}</a>
-                    </span>),
-
-            image: (url) => (
-                    <span>
-                        <img src={url} />
-                    </span>)
-        },
-        
-        handleCreate: function(info){
-            const self = this;
-
-            config.Create(info, function(item){
-                // 初级接口的坑
-                if(!item){
-                    config.initData(function(list){
-                        self.setState({
-                            loading: false,
-                            resultList: list
-                        });
-                    });
-                    return;
-                }
-
-                let lists = self.state.resultList;
-                lists.unshift(item);
-
-                self.setState({
-                    loading: false,
-                    resultList: lists
-                });
-            });
-        },
-
-        handleUpdate: function(info){
-            const self = this;
-            let result = Immutable.fromJS(self.state.resultList);
-            
-            let infoN = Immutable.fromJS(self.state.updateFromItem).merge(info).toJS();
-            config.Update(infoN, function(item){
-                let resultList = result.map(function(v, i){
-                    if(v.get('key') === item.key){
-                        return Immutable.fromJS(item);
-                    }else{
-                        return v;
-                    }
-                });
-                message.success('更新成功');
-                
-                self.setState({
-                    loading: false,
-                    updateFromShow: false,
-                    resultList: resultList.toJS()
-                });
-            });
-        },
-        hideUpdateForm: function(){
-            this.setState({
-                updateFromShow: false,
-                updateFromItem: {}
-            });
-        },
-
-        // 搜索更新处理
-        handleRetrieve: function(info){
-            const self = this;
-            self.setState({
-                loading: true
-            });
-            
-            config.Retrieve(info, function(list){
-                self.setState({
+    componentDidMount() {
+        const { pageData, initData } = this.props;
+        // 处理接口分页的逻辑
+        if(pageData){
+            this.getpageData(1);
+        }else{ // 处理 前端分页的逻辑
+            initData((list) => {
+                this.setState({
                     loading: false,
                     resultList: list
                 });
             });
-        },
-        
-        // table 操作列回调处理
-        operateCallbacks: function(item, btn){
-            const self = this;
+        }
+    }
 
-            if(btn.type){
+    render() {
 
-                let resultList;
-                let type = btn.type;
-                let itemI = Immutable.fromJS(item);
-                let result = Immutable.fromJS(self.state.resultList);
-                
-                // table 操作栏目通用设定为 更新与删除 两项
-                if(type === 'update'){
-                    this.setState({
-                        updateFromShow: true,
-                        updateFromItem: itemI.toJS()
-                    });
-                }else if(type === 'delete'){
-                    this.setState({
-                        loading: true
-                    });
-                    
-                    config.Delete(itemI.toJS(), function(){
-                        resultList = result.filter(function(v, i){
-                            if(v.get('key') !== itemI.get('key')){
-                                return true;
-                            }
-                        });
-                        message.success('删除成功');
+        const { pageData, RType, CType, UType } = this.props;
 
-                        self.setState({
-                            loading: false,
-                            resultList: resultList.toJS()
-                        });
-                    });
-                }
-
-               
-            }else if(btn.callback){
-                btn.callback(item);
+        let table;
+        if(pageData){
+            const pagination = {
+                total: this.state.total,
+                pageSize: this.state.pageSize,
+                onChange: this.getpageData
             }
-        },
 
-        componentDidMount: function(){
-            const self = this;
-            
-            // 处理接口分页的逻辑
-            if(config.pageData){
-                self.getpageData(1);
-            }else{ // 处理 前端分页的逻辑
-                config.initData(function(list){
+            table = <Table dataSource={this.state.resultList} columns={this.state.columns} loading={this.state.loading} pagination={pagination} bordered/>;
+        }else{
+            table = <Table dataSource={this.state.resultList} columns={this.state.columns} loading={this.state.loading} bordered/>;
+        }
+
+        return  <div className={this.props.className} style={this.props.style}>
+                    <RForm RType={RType} submit={this.handleRetrieve}/>
+                    <CForm CType={CType} submit={this.handleCreate}/>
+                    <UForm UType={UType} submit={this.handleUpdate} isShow={this.state.updateFromShow} updateItem={this.state.updateFromItem} hideForm={this.hideUpdateForm}/>
+                    {table}
+                </div>
+    }
+
+    // 预处理配置显示中的 colums 数据 用于anted的table配置
+    handleColumns = (lists) => {
+        const self = this;
+
+        let columns = [];
+        lists.forEach((item) => {
+            let column = {
+                title: item.title,
+                dataIndex: item.dataIndex,
+                key: item.dataIndex,
+                width: item.width
+            }
+
+            if( item.type === 'operate' ){
+                // 兼容单一形式与数组形式
+                let btns = Array.isArray(item.btns) ? item.btns : [item.btns];
+
+                // 处理表单 操作 栏目以及回调函数
+                column.render = item.render || function(txt, record){
+                    return <span>
+                            {
+                                btns.map(function(btn,i) {
+                                    if( btn.text ){
+                                        return  (
+                                            <span key={i}>
+                                                <a href="javascript:void 0;" onClick={self.operateCallbacks.bind(self, record, btn)}>{btn.text}</a>
+                                                {i!==btns.length-1?<span className="ant-divider"></span>:''}
+                                            </span>
+                                        );
+                                    }else if( btn.render ){
+                                        return (
+                                            <span key={i}>
+                                                {btn.render(txt, record)}
+                                                {i!==btns.length-1?<span className="ant-divider"></span>:''}
+                                            </span>
+                                        );
+                                    }
+
+                                })
+                            }
+                            </span>
+                };
+            } else if( !item.dataIndex ) {
+                item.dataIndex = 'NORMAL_INDEX' + (Math.random() * 1000 | 0);
+                column.render = item.render || renderFunc(item.type);
+            } else{
+                column.render = item.render || renderFunc(item.type) || ((text) => (<span>{text}</span>));
+            }
+
+            if(item.sort){
+                column.sorter = item.sorter || ((a, b) => a[item.dataIndex] - b[item.dataIndex]);
+            }
+            columns.push(column);
+
+        });
+
+        return columns;
+    }
+
+    handleCreate = (info) => {
+        const self = this;
+        const { Create, initData } = this.props;
+
+        Create.Create(info, function(item){
+            // 初级接口的坑
+            if(!item){
+                initData.initData(function(list){
                     self.setState({
                         loading: false,
                         resultList: list
                     });
                 });
+                return;
             }
-        },
 
-        getpageData: function(num){
-            const self = this;
+            let lists = self.state.resultList;
+            lists.unshift(item);
+
             self.setState({
-                loading: true
+                loading: false,
+                resultList: lists
             });
+        });
+    }
 
-            config.pageData(num,function(list, info){
-                self.setState({
-                    loading: false,
-                    resultList: list,
-                    total: info.total,
-                    pageSize: info.pageSize||10,
-                });
-            });
-
+    handleUpdate = (info) => {
+        const self = this;
+        let result = {
+            ...this.state.resultList
         }
-    });
+
+        let infoN = {
+            ...this.state.updateFromItem,
+            ...info
+        }
+
+        this.props.Update(infoN, function(item){
+            const resultList = result.map(function(v, i){
+                if(v.key === item.key){
+                    return item;
+                }else{
+                    return v;
+                }
+            });
+            message.success('更新成功');
+
+            self.setState({
+                loading: false,
+                updateFromShow: false,
+                resultList: resultList
+            });
+        });
+    }
+    hideUpdateForm = () => {
+        this.setState({
+            updateFromShow: false,
+            updateFromItem: {}
+        });
+    }
+
+    // 搜索更新处理
+    handleRetrieve = (info) => {
+        const self = this;
+        this.setState({
+            loading: true
+        });
+
+        this.props.Retrieve(info, function(list){
+            self.setState({
+                loading: false,
+                resultList: list
+            });
+        });
+    }
+
+    // table 操作列回调处理
+    operateCallbacks = (item, btn) => {
+        const self = this;
+
+        if(btn.type){
+
+            let resultList;
+            let type = btn.type;
+            let itemI = { ...item };
+            let result = [ ...this.state.resultList ];
+
+            // table 操作栏目通用设定为 更新与删除 两项
+            if(type === 'update'){
+                this.setState({
+                    updateFromShow: true,
+                    updateFromItem: itemI
+                });
+            }else if(type === 'delete'){
+                this.setState({
+                    loading: true
+                });
+
+                this.props.Delete(itemI, function(){
+                    resultList = result.filter(function(v, i){
+                        if(v.key !== itemI.key){
+                            return true;
+                        }
+                    });
+                    message.success('删除成功');
+
+                    self.setState({
+                        loading: false,
+                        resultList: resultList
+                    });
+                });
+            }
+
+        }else if(btn.callback){
+            btn.callback(item);
+        }
+    }
+
+    getpageData = (num) => {
+
+        this.setState({
+            loading: true
+        });
+
+        this.props.pageData(num, (list, info) => {
+            this.setState({
+                loading: false,
+                resultList: list,
+                total: info.total,
+                pageSize: info.pageSize||10,
+            });
+        });
+
+    }
 }
 
 
-export default Pager;
+export default TableFeature;

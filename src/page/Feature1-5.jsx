@@ -145,6 +145,7 @@ const conf = {
 
 };
 
-const Feature = Pager(conf);
-
+const Feature = () => {
+    return <Pager className="item" {...conf}/>;
+}
 export default Feature;
