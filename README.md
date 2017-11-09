@@ -63,7 +63,7 @@ npm Build 开始构建压缩
 ```
 
 
-## 自动化配置页面功能列表
+## 自动化配置页面功能列表(components/pager)
 - [ ] 登录页面
 - [x] table数据
     - [x] 展现配置化实现
@@ -80,5 +80,36 @@ npm Build 开始构建压缩
 - [x] 通用图片上传组件（须自行调整）
 - [x] 复制粘贴功能
 
-## 复杂型集成组件功能
-- 
+## 复杂型集成组件功能(components/)
+- 配置化表单组件
+- 配置化浮层表单组件
+- 配置化表格组件
+- 头部，侧栏，主内容区基本配置组件
+
+
+## 整站配置文件详解
+
+### src/config/platConfig.js
+
+需配置整体的后台系统数据，以及自定义的配置数据
+
+**header 管理系统头部配置(必要属性)**
+
+* title    管理系统显示的标题
+* icon     管理系统显示的icon可在 [icon](https://ant.design/components/icon/) 查看
+* style    自定义设置头部样式
+
+```
+// header 示例 
+header: {
+    title: "测试配置管理后台",
+    icon: "appstore",
+    style: {
+        padding: "15px 15px 15px 25px",
+        borderBottom: "1px solid #E9E9E9",
+        backgroundColor: "#F5F5F5"
+    }
+}
+```
+
+![image](http://image.freefe.cc/20161205140700.png)

@@ -18,24 +18,24 @@
  *              render: (text, item) => ( <span>
  *                                          <a href={text}>{item.name}</a>
  *                                      </span>)
- *          
+ *
  *          },{ // 可编辑元素
  *              title string 必需        table header 文案
  *              dataIndex string 必需    数据对象内的属性，也做react vdom 的key
  *              type string 必需 link image  operate   table 内显示的类型
  *              sort  boolean 非必需  是否需要排序
  *              width  number 必需  可编辑情况下 为了在切换编辑状态不影响列宽度 建议提供数值或者百分比
- *              
+ *
  *              editable boolean 非必需 目前仅支持type为string的 可编辑状态
  *              onChange function 非必需 若为可编辑 该回调函数则为必须来处理编辑之后返回数据的回调函数
  *
  *              options array 非必需 若type为select类型并且为可编辑 则该字段为必须字段
- *              
+ *
  *          },{
  *              // 操作的类型必须为 operate
  *              // 变可以使用btns 数组形式
  *              title: '操作',
- *              type: 'operate',    
+ *              type: 'operate',
  *              width: 120,
  *              btns: [{
  *                      text: '展示',
@@ -48,7 +48,6 @@
  *              }]
  *          }
  *      ]
- *      
  * }
  */
 
