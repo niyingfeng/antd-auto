@@ -3,6 +3,7 @@
  * @author niyingfeng<yingfeng.ni@gmail.com>
  */
 
+// 仅用于本地环境数据接口与线上接口配置
 const isLocal = location.hostname === 'localhost';
 
 const apiConfig = {

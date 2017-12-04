@@ -27,6 +27,7 @@
  */
 
 const Config = {
+    // 头部组件展现配置 与 主菜单配置
     header: {
         title: '通用配置管理平台',
         icon: 'appstore',
@@ -44,6 +45,7 @@ const Config = {
         }]
     },
 
+    // 侧栏菜单配置 可无限递归菜单
     sider: {
         menu: [{
                 title: 'Table数据与功能展示',
@@ -152,6 +154,7 @@ const Config = {
         style: {}
     },
 
+    // header 与 sider 中 key 对应展现在 Main 内的的页面级组件
     main: {
         components: {
             'defallt': {
@@ -246,6 +249,7 @@ const Config = {
         style: {}
     },
 
+    // 可自定义用户信息 与 登入状态
     userInfo: {
         name: BaiduInfo.name,
         aver: BaiduInfo.aver,

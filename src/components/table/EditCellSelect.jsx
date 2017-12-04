@@ -71,7 +71,6 @@ class EditCellInput extends React.Component {
                         ? <Select mode={this.props.mode} defaultValue={values} disabled />
                         : <span>空</span>
                     }
-                    
                     <Icon
                     type="edit"
                     className="editable-cell-icon"

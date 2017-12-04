@@ -13,7 +13,7 @@ import Main from '../components/main/Main';
 
 import Login from '../components/login/Login';
 
-//const components = platConfig.main.components;
+// 项目三模块的配置信息
 const headerInfo = {
     ...platConfig.header,
     name: platConfig.userInfo.name,
@@ -26,6 +26,7 @@ const mainInfo = {
     style: platConfig.sider.style
 }
 
+// 用户信息 权限与登入页面
 const IndexInfo = {
     permission: platConfig.userInfo.permission,
     loginUrl: platConfig.userInfo.loginUrl

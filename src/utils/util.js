@@ -7,6 +7,7 @@
 // 处理自定义链接参数数据
 
 export default {
+    // 生成指定日期格式 如 YYYY-MM-DD/dd HH/hh:mm:ss
     DateFormat(date, fmt) {
         if (typeof date === 'string') {
             date = new Date(date);
@@ -42,6 +43,7 @@ export default {
         return fmt;
     },
 
+    // 解析search参数数据格式
     ParamsFixed(str) {
         let pObj = {};
         let pArr = str.split('&');
@@ -53,6 +55,7 @@ export default {
         return pObj;
     },
 
+    // XMLHttpRequest post 上传图片
     uploadFiles(url, key, file, opt) {
         //return false;
         if(!window.XMLHttpRequestUpload || !window.File || !window.FileList || !window.Blob){
